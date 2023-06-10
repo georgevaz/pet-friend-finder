@@ -60,7 +60,9 @@ module.exports = {
   resolve: {
     extensions: [
       '.js',
-      '.jsx'
+      '.jsx',
+      '.ts',
+      '.tsx'
     ],
   },
 };
