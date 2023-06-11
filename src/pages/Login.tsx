@@ -4,7 +4,7 @@ import useDataStore from "../store/store";
 import { useStore } from "zustand";
 
 const Login = () => {
-  const { name, email, setName, setEmail } = useStore(useDataStore);
+  const { name, email, isLoggedIn, setName, setEmail, setLoggedIn } = useStore(useDataStore);
 
   const handleNameChange = (e: string) => {
     setName(e);
@@ -32,6 +32,7 @@ const Login = () => {
       });
       const status = await fetchResponse.status;
       if (status === 200 ){
+        setLoggedIn(isLoggedIn);
         navigate('/');
       }
     } catch (error) {

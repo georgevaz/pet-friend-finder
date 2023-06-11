@@ -4,6 +4,9 @@ type Store = {
 
     setName: (data: string) => void;
     setEmail: (data: string) => void;
+
+    isLoggedIn: boolean;
+    setLoggedIn: (isLoggedIn: boolean) => void;
 };
 
 export type { Store };

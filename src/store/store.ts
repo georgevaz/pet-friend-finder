@@ -15,6 +15,13 @@ const useDataStore = create<Store>(set => ({
             email: data,
         })
     },
+
+    isLoggedIn: false,
+    setLoggedIn: (isLoggedIn) => {
+        set({
+            isLoggedIn: !isLoggedIn,
+        })
+    }
 }));
 
 export default useDataStore;
