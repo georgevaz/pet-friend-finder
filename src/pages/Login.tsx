@@ -32,7 +32,7 @@ const Login = () => {
       });
       const status = await fetchResponse.status;
       if (status === 200 ){
-        setLoggedIn(isLoggedIn);
+        setLoggedIn(true);
         navigate('/');
       }
     } catch (error) {

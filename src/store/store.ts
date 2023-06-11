@@ -17,9 +17,9 @@ const useDataStore = create<Store>(set => ({
     },
 
     isLoggedIn: false,
-    setLoggedIn: (isLoggedIn) => {
+    setLoggedIn: (bool) => {
         set({
-            isLoggedIn: !isLoggedIn,
+            isLoggedIn: bool,
         })
     }
 }));
