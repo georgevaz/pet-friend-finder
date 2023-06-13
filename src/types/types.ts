@@ -1,4 +1,4 @@
-type Store = {
+type UserStore = {
     name: string;
     email: string;
 
@@ -9,4 +9,21 @@ type Store = {
     setLoggedIn: (isLoggedIn: boolean) => void;
 };
 
-export type { Store };
+type DogSearchParams = { 
+    breeds?: string[], 
+    zipCodes?: string[], 
+    ageMin?: number, 
+    ageMax?: number, 
+    size?: number, 
+    from?:number, 
+    sort?:string
+}
+
+type DogStore = {
+    breedsList: string[];
+    searchResults: object; // figure out what returns
+
+    fetchBreeds: () => void;
+    fetchDogs: (params: DogSearchParams) => void;
+}
+export type { UserStore, DogStore };

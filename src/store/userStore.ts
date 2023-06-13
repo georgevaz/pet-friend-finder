@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { Store } from '../types/types';
+import { UserStore } from '../types/types';
 
-const useDataStore = create<Store>(set => ({
+const useUserStore = create<UserStore>(set => ({
     name: '',
     email: '',
 
@@ -24,4 +24,4 @@ const useDataStore = create<Store>(set => ({
     }
 }));
 
-export default useDataStore;
+export default useUserStore;

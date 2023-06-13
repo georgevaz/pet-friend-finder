@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useDataStore from "../store/store";
+import useUserStore from "../store/userStore";
 import { useStore } from "zustand";
 
 const Login = () => {
-  const { name, email, isLoggedIn, setName, setEmail, setLoggedIn } = useStore(useDataStore);
+  const { name, email, isLoggedIn, setName, setEmail, setLoggedIn } = useStore(useUserStore);
 
   const handleNameChange = (e: string) => {
     setName(e);
@@ -33,7 +33,7 @@ const Login = () => {
       const status = await fetchResponse.status;
       if (status === 200 ){
         setLoggedIn(true);
-        navigate('/');
+        navigate('/main');
       }
     } catch (error) {
       console.error(error);

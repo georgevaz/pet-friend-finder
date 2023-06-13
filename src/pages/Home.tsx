@@ -1,10 +1,9 @@
 import React from "react";
 import { useStore } from "zustand";
-import useDataStore from "../store/store";
-import SearchContainer from "../components/SearchContainer";
+import useUserStore from "../store/userStore";
 
 const Home = () => {
-  const { isLoggedIn, setLoggedIn } = useStore(useDataStore);
+  const { isLoggedIn, setLoggedIn } = useStore(useUserStore);
 
   const handleLogout = async () => {
     try {
@@ -27,7 +26,6 @@ const Home = () => {
         <>
           <p>hello!</p>
           <button onClick={() => handleLogout()}>Logout</button>
-          <SearchContainer/>
         </>
         
         : <></>}
