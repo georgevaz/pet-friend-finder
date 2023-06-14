@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import { DogStore } from '../types/types';
+import { DogSearchResult, DogStore } from '../types/types';
 
 const useDogStore = create<DogStore>(set => ({
     breedsList: [],
-    searchResults: {},
+    dogSearchResults: [],
 
     fetchBreeds: async () => {
         try {
@@ -22,13 +22,9 @@ const useDogStore = create<DogStore>(set => ({
     fetchDogs: async (params) => {
         let queryString = '';
         for(const [key, value] of Object.entries(params)){
-            //breeds[]=Lhasa&breeds[]=Affenpinscher
-            if(Array.isArray(value)){
-                value.forEach(val => queryString += `${key}[]=${val}&`)
-            }
-
+            if(Array.isArray(value)) value.forEach(val => queryString += `${key}[]=${val}&`);
+            else queryString += `${key}=${value}&`
         }
-        // queryString += `breeds=${breeds.join(',')}&sort=name:asc`;
         const baseUrl = 'https://frontend-take-home-service.fetch.com/dogs/search';
         const url = `${baseUrl}${queryString ? `?${queryString}` : ''}`;
         try {
@@ -36,11 +32,24 @@ const useDogStore = create<DogStore>(set => ({
             method: 'GET',
             credentials: 'include'
           });
-          const dogsResponse = await response.json();
-          set({
-            searchResults: dogsResponse,
-          })
-          console.log(dogsResponse)
+          const dogsResponse: DogSearchResult = await response.json();
+
+          try {
+            const fetchResponse = await fetch('https://frontend-take-home-service.fetch.com/dogs', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(dogsResponse.resultIds),
+              credentials: 'include',
+            });
+            const response = await fetchResponse.json();
+            set({
+                dogSearchResults: response
+            })
+          } catch (error) {
+            console.error(error);
+          }
         } catch (error) {
           console.error(error);
         }
