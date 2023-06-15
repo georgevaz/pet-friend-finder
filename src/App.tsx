@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Main from './pages/Main';
 import NoPage from "./pages/NoPage";
+import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           </Route>
         </Routes>
       </BrowserRouter>
+      <Footer />
     </>
   );
 };

@@ -4,7 +4,7 @@ import SearchContainer from "../components/SearchContainer";
 const Main = () => {
   return(
     <>
-    <SearchContainer/>
+      <SearchContainer/>
     </>
   );
 };

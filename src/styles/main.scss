@@ -5,6 +5,7 @@ $syne: 'Syne', sans-serif;
 
 $primary-color: #FFA900; // Web Orange
 $primary-dark: #CF8900; // Web Orange
+$primary-light: #FFD481; // Web Orange
 $secondary-color: #300D38; // Valentino
 $secondary-dark: #120515; // Valentino
 $white: #F9F8F9; // Alabaster
@@ -17,11 +18,12 @@ $white-dark: #CDCDCD; // Alabaster
 
 .nav-bar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    background-color: red;
-    width: 100%;
+    background-color: $white;
     height: 90px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .button-primary {
