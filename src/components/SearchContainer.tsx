@@ -27,7 +27,7 @@ const SearchContainer = () => {
           height='auto'
           image={result.img}
           />
-          <p>{result.name}</p>
+          <p className="test">{result.name}</p>
           <p>{result.age}</p>
           <p>{result.zip_code}</p>
           <p>{result.breed}</p>
