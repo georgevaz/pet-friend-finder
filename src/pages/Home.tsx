@@ -1,10 +1,11 @@
 import React from "react";
+import LandingContainer from "../components/LandingContainer";
 
 const Home = () => {
-
+  console.log(document.cookie)
   return(
     <>
-      <img src="https://images.pexels.com/photos/1378849/pexels-photo-1378849.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
+      <LandingContainer />
     </>
   );
 };

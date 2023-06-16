@@ -3,7 +3,7 @@ import React from 'react';
 const LandingContainer = () => {
   return(
     <>
-      <p>This is the landing container</p>
+      <img src="https://images.pexels.com/photos/1378849/pexels-photo-1378849.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
     </>
   );
 };

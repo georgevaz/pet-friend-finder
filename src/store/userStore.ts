@@ -16,11 +16,12 @@ const useUserStore = create<UserStore>(set => ({
         })
     },
 
-    isLoggedIn: false,
+    isLoggedIn: localStorage.getItem('isLoggedIn') === 'true',
     setLoggedIn: (bool) => {
         set({
             isLoggedIn: bool,
-        })
+        });
+        localStorage.setItem('isLoggedIn', bool ? 'true' : 'false')
     }
 }));
 
