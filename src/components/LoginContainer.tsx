@@ -47,8 +47,8 @@ const LoginContainer = () => {
       <div className="login-container">
         <div className="form-container">
           <p className="body-h4">Welcome!</p>
-          <input type="text" placeholder="Name" onChange={(e) => handleNameChange(e.target.value)} />
-          <input type="text" placeholder="E-mail" onChange={(e) => handleEmailChange(e.target.value)} />
+          <TextField className="input-textfield" id="outlined" label="Name" onChange={(e) => handleNameChange(e.target.value)} />
+          <TextField className="input-textfield" id="outlined" label="E-mail" onChange={(e) => handleEmailChange(e.target.value)} />
           <Button variant='contained' className='button-primary-form' onClick={() => handleSubmit()}>Let's go!</Button>
         </div>
       </div>

@@ -163,3 +163,26 @@ $main-container-height: calc(100vh - $navbar-height * 2);
     height: 250px;
     padding: 35px;
 }
+
+.input-textfield {
+    & label {
+        font-family: $lexend;
+        color: $white-dark;
+    }
+    & label.Mui-focused{
+        font-family: $lexend;
+        color: $secondary-color
+    }
+    & .MuiOutlinedInput-root {
+        &.MuiOutlinedInput-notchedOutline {
+            border-radius: 5px;
+            border-color: $white-dark;
+        }
+        &:hover .MuiOutlinedInput-notchedOutline{
+            border-color: $white-dark
+        }
+        &.Mui-focused .MuiOutlinedInput-notchedOutline{
+            border-color: $secondary-color
+        }
+    }
+}
