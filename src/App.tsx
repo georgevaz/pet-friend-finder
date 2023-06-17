@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 const App = () => {
   return (
     <>
+    <div className='page-container'>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<NavBar />}>
@@ -22,6 +23,7 @@ const App = () => {
         </Routes>
       </BrowserRouter>
       <Footer />
+    </div>
     </>
   );
 };

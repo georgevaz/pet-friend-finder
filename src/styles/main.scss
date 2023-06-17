@@ -8,22 +8,74 @@ $primary-dark: #CF8900; // Web Orange
 $primary-light: #FFD481; // Web Orange
 $secondary-color: #300D38; // Valentino
 $secondary-dark: #120515; // Valentino
+$secondary-light: #582B63; // Valentino
 $white: #F9F8F9; // Alabaster
 $white-dark: #CDCDCD; // Alabaster
+$error: #FF4E42; 
+
+
+.hero-h1 {
+    font-family: $syne;
+    color: black;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 4.375em;
+    line-height: 1em;
+    
+}
+
+.p-large {
+    font-family: $lexend;
+    color: black;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+
+$navbar-height: 90px;
+
+@mixin padding-horizontal {
+    padding-left: 30px;
+    padding-right: 30px;
+}
 
 * {
     margin: 0;
     padding: 0;
-  }
+    font-family: $lexend;
+    font-size: 16px;
+}
+
+.page-container {
+    
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #FFD481;
+}
 
 .nav-bar {
+    @include padding-horizontal;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: $white;
-    height: 90px;
-    padding-left: 30px;
-    padding-right: 30px;
+    height: $navbar-height;
+    z-index: 2;
+}
+
+.footer {
+    display: flex;
+    background-color: $secondary-color;
+    color: $white;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: $navbar-height;
+    position: absolute;
+    bottom: 0;
+    
 }
 
 .button-primary {
@@ -38,4 +90,37 @@ $white-dark: #CDCDCD; // Alabaster
     &.MuiButton-contained:hover {
         background-color: $primary-color;
     }
+}
+
+@mixin landing-elements-sizing{
+    height: 460px;
+}
+
+.landing-container{
+    @include padding-horizontal;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - $navbar-height * 2);
+}
+
+.landing-copy-container {
+    @include landing-elements-sizing;
+    width: 40vw;
+    white-space: nowrap;
+    z-index: 1;
+    filter: drop-shadow(5px 5px 20px rgba(250, 250, 250, 0.5));
+}
+
+.hero-image-container {
+    @include landing-elements-sizing;
+}
+
+.hero-image {
+    @include landing-elements-sizing;
+    width: auto;
+    object-fit: cover;
+    border-radius: 301px 301px 0px 301px;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
 }

@@ -5,7 +5,7 @@ const Footer = () => {
     <>
       <div className="footer">
         <p>
-          sklfjhdslkfjslkfjsl
+          Made by George Vazquez
         </p>
       </div>
     </>
