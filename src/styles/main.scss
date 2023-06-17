@@ -21,7 +21,15 @@ $error: #FF4E42;
     font-weight: 600;
     font-size: 4.375em;
     line-height: 1em;
-    
+}
+
+.body-h4{
+  font-family: $syne;
+  color: black;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5em;
+  line-height: 1em;
 }
 
 .p-large {
@@ -34,6 +42,7 @@ $error: #FF4E42;
 }
 
 $navbar-height: 90px;
+$main-container-height: calc(100vh - $navbar-height * 2);
 
 @mixin padding-horizontal {
     padding-left: 30px;
@@ -78,18 +87,28 @@ $navbar-height: 90px;
     
 }
 
-.button-primary {
+@mixin button-default{
     &.MuiButton-contained {
         background-color: $primary-color;
         font-family: $lexend;
         color: $white;
-        height: 48px;
-        width: 125px;
-        border-radius: 25px;
     }
     &.MuiButton-contained:hover {
         background-color: $primary-color;
     }
+}
+
+.button-primary {
+    @include button-default;
+    &.MuiButton-contained {
+        height: 48px;
+        width: 125px;
+        border-radius: 25px;
+    }
+}
+
+.button-primary-form {
+    @include button-default;
 }
 
 @mixin landing-elements-sizing{
@@ -102,7 +121,7 @@ $navbar-height: 90px;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - $navbar-height * 2);
+    height: $main-container-height;
 }
 
 .landing-copy-container {
@@ -110,7 +129,7 @@ $navbar-height: 90px;
     width: 40vw;
     white-space: nowrap;
     z-index: 1;
-    filter: drop-shadow(5px 5px 20px rgba(250, 250, 250, 0.5));
+    filter: drop-shadow(5px 5px 20px rgba(250, 250, 250, 0.75));
 }
 
 .hero-image-container {
@@ -123,4 +142,24 @@ $navbar-height: 90px;
     object-fit: cover;
     border-radius: 301px 301px 0px 301px;
     filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: $main-container-height;
+}
+
+.form-container {
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    width: 300px;
+    height: 250px;
+    padding: 35px;
 }
