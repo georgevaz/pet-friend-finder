@@ -10,7 +10,7 @@ const SearchContainer = () => {
   useEffect(() => {
     fetchBreeds();
     fetchDogs({
-      breeds: [],
+      breeds: ['Standard Schnauzer'],
       zipCodes: [],
       ageMin: 1,
       ageMax: 6,
@@ -22,30 +22,31 @@ const SearchContainer = () => {
   const results = [];
   for(const result of dogSearchResults){
     results.push(
-      <Card key={result.id} className='card-container' sx={{ maxWidth: 345, margin:  5, }}>
+      <Card key={result.id} className='card-container'>
         <IconButton onClick={() => console.log('yo')}>
           <FavoriteIcon/>
         </IconButton>
         <CardMedia
           component='img'
-          // height='auto'
           image={result.img}
+          onClick={() => console.log('ENHANCE')}
           />
-          <div className='card-copy-container'>
-            <div className="title-location-container">
-              <p className="card-title">{result.name}</p>
-              <p className="card-p-location">{result.zip_code}</p>
-            </div>
-            <p className="card-sub-title">{result.breed}</p>
-            <p className="card-p-description">Age: {result.age}</p>
-          </div>
+        <div className='card-copy-container'>
+          <p className="card-title">{result.name}</p>
+          <p className="card-p-description">
+            {result.breed}
+            <br/>
+            Age: {result.age} years
+          </p>
+          <p className="card-p-location">{result.zip_code}</p>
+        </div>
       </Card>
     );
   }
 
   return(
     <>
-    <div>
+    <div style={{display: 'flex', flexDirection: 'row'}}>
      {results}
     </div>
     </>
