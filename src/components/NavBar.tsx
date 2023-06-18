@@ -5,7 +5,7 @@ import { useStore } from "zustand";
 import useUserStore from "../store/userStore";
 
 const NavBar = () => {
-  const { isLoggedIn, setLoggedIn } = useStore(useUserStore);
+  const { name, isLoggedIn, setLoggedIn } = useStore(useUserStore);
 
   const handleLogout = async () => {
     try {
@@ -28,9 +28,10 @@ const NavBar = () => {
           <img src='https://asset.brandfetch.io/id7Cm60rQf/idITbIwT7X.svg' style={{ height: '3em' }}/>
         </Link>
         <ul style={{ listStyle: 'none' }}>
-          <li>
+          <li className='nav-bar-button-container'>
             {isLoggedIn ? 
           <>
+            <p className='body-h4' style={{ marginRight: '30px' }}>Welcome, { name }!</p>
             <Link to='/'>
               <Button variant='contained' className='button-primary' onClick={() => handleLogout()}>Logout</Button>
             </Link>

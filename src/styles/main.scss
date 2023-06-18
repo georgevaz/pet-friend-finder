@@ -57,7 +57,6 @@ $main-container-height: calc(100vh - $navbar-height * 2);
 }
 
 .page-container {
-    
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -72,6 +71,12 @@ $main-container-height: calc(100vh - $navbar-height * 2);
     background-color: $white;
     height: $navbar-height;
     z-index: 2;
+
+    & .nav-bar-button-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 }
 
 .footer {
@@ -122,26 +127,26 @@ $main-container-height: calc(100vh - $navbar-height * 2);
     align-items: center;
     justify-content: center;
     height: $main-container-height;
-}
 
-.landing-copy-container {
-    @include landing-elements-sizing;
-    width: 40vw;
-    white-space: nowrap;
-    z-index: 1;
-    filter: drop-shadow(5px 5px 20px rgba(250, 250, 250, 0.75));
-}
+    & .landing-copy-container {
+        @include landing-elements-sizing;
+        width: 40vw;
+        white-space: nowrap;
+        z-index: 1;
+        filter: drop-shadow(5px 5px 20px rgba(250, 250, 250, 0.75));
+    }
 
-.hero-image-container {
-    @include landing-elements-sizing;
-}
+    & .hero-image-container {
+        @include landing-elements-sizing;
 
-.hero-image {
-    @include landing-elements-sizing;
-    width: auto;
-    object-fit: cover;
-    border-radius: 301px 301px 0px 301px;
-    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+        & .hero-image {
+            @include landing-elements-sizing;
+            width: auto;
+            object-fit: cover;
+            border-radius: 300px 300px 0px 300px;
+            filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+        }
+    }
 }
 
 .login-container {
@@ -150,19 +155,83 @@ $main-container-height: calc(100vh - $navbar-height * 2);
     justify-content: center;
     align-items: center;
     height: $main-container-height;
+    
+    & .form-container {
+        background-color: $white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        width: 300px;
+        height: 250px;
+        padding: 35px;
+    }
 }
 
-.form-container {
-    background-color: $white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    width: 300px;
-    height: 250px;
-    padding: 35px;
+
+.card-container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    
+    .card-sub-title {
+        font-family: $lexend;
+        color: black;
+        font-style: normal;
+        font-size: 0.5em;
+    }
+    
+    .card-p-description {
+        font-family: $lexend;
+        color: black;
+        font-style: normal;
+        font-size: 0.438em;
+    }
+
+    & .MuiCardMedia-media {
+        display: block;
+        height: 133px;
+        width: 100%;
+    }
+    & .MuiIconButton-root{
+        color: $white-dark;
+        position: absolute;
+        top: 2.5%;
+        left: 77.5%;
+        & .MuiButtonBase-root {
+        }
+        & .MuiIcon-root {
+            font-size: 100px !important;
+            width: 100px;
+        }
+    }
+    & .card-copy-container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    & .title-location-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        & .card-title {
+            font-family: $lexend;
+            color: black;
+            font-style: bold;
+            font-size: 0.875em;
+        }
+
+        & .card-p-location {
+            font-family: $lexend;
+            color: black;
+            font-style: normal;
+            font-size: 0.563em;
+        }
+    }
 }
+
 
 .input-textfield {
     & label {
