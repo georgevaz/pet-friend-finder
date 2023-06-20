@@ -23,6 +23,13 @@ $error: #FF4E42;
     line-height: 1em;
 }
 
+.sub-page-h1{
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 3em;
+}
+
 .body-h4{
   font-family: $syne;
   color: black;
@@ -61,6 +68,7 @@ $main-container-height: calc(100vh - $navbar-height * 2);
     flex-direction: column;
     height: 100vh;
     background-color: #FFD481;
+    background: linear-gradient(210deg, $primary-light 0%, $primary-color 57%);
 }
 
 .nav-bar {
@@ -68,7 +76,6 @@ $main-container-height: calc(100vh - $navbar-height * 2);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: $white;
     height: $navbar-height;
     z-index: 2;
 
@@ -169,7 +176,6 @@ $main-container-height: calc(100vh - $navbar-height * 2);
     }
 }
 
-
 .card-container {
     min-width: 250px;
     width: 250px;
@@ -216,15 +222,14 @@ $main-container-height: calc(100vh - $navbar-height * 2);
     }
 }
 
-
-.input-textfield {
+.input-textfield, .input-dropdown {
     & label {
         font-family: $lexend;
         color: $white-dark;
     }
     & label.Mui-focused{
         font-family: $lexend;
-        color: $secondary-color
+        color: $secondary-color;
     }
     & .MuiOutlinedInput-root {
         &.MuiOutlinedInput-notchedOutline {
@@ -238,4 +243,52 @@ $main-container-height: calc(100vh - $navbar-height * 2);
             border-color: $secondary-color
         }
     }
+}
+
+.input-drowdown-item {
+    &.MuiMenuItem-root {
+        background-color: $white;
+        &.MuiMenuItem-root.Mui-selected {
+            background-color: rgba($white-dark, 0.5);
+        }
+        &.MuiMenuItem-root:hover {
+            background-color: $white-dark;
+        }
+    }
+}
+
+.MuiPopover-root {
+    & .MuiMenu-paper{
+        background-color: $white;
+    }
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 90%;
+    width: 100%;
+}
+
+.search-container {
+    background-color: #120515;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 75%;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: $white;
+    height: 100%;
+    width: 25%;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+    border-radius: 0px 10px 10px 0px;
 }

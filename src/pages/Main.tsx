@@ -5,8 +5,10 @@ import FilterContainer from "../components/FilterContainer";
 const Main = () => {
   return(
     <>
-      <FilterContainer />
-      <SearchContainer />
+      <div className="main-container">
+        <FilterContainer />
+        <SearchContainer />
+      </div>
     </>
   );
 };

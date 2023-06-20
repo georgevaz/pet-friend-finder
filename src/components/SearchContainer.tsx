@@ -14,7 +14,7 @@ const SearchContainer = () => {
       zipCodes: [],
       ageMin: 1,
       ageMax: 6,
-      size: 100,
+      size: 10,
       from: 0,
     });
   }, []);
@@ -46,7 +46,7 @@ const SearchContainer = () => {
 
   return(
     <>
-    <div style={{display: 'flex', flexDirection: 'row'}}>
+    <div className="search-container">
      {results}
     </div>
     </>
