@@ -16,6 +16,8 @@ const NavBar = () => {
       const status = await fetchResponse.status;
       if (status === 200 ){
         setLoggedIn(false);
+        localStorage.removeItem('name');
+        localStorage.removeItem('email');
       }
     } catch (error) {
       console.error(error);

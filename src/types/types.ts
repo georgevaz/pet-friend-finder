@@ -16,16 +16,26 @@ interface Location {
     county: string
 };
 
+
 interface UserStore {
     name: string;
     email: string;
-
+    
     setName: (data: string) => void;
     setEmail: (data: string) => void;
-
+    
     isLoggedIn: boolean;
     setLoggedIn: (isLoggedIn: boolean) => void;
 };
+
+interface ZipCityState {
+    [key: string]: CityState
+};
+
+interface CityState {
+    city: string
+    state: string
+}
 
 type DogSearchParams = { 
     breeds?: string[], 
@@ -47,8 +57,9 @@ type DogSearchResult = {
 interface DogStore {
     breedsList: string[];
     dogSearchResults: Dog[];
+    zipCityState: ZipCityState;
 
     fetchBreeds: () => void;
     fetchDogs: (params: DogSearchParams) => void;
 }
-export type { UserStore, DogStore, DogSearchResult, Dog, Location, DogSearchParams };
+export type { UserStore, DogStore, DogSearchResult, Dog, Location, DogSearchParams, ZipCityState, CityState };

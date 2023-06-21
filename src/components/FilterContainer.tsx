@@ -27,8 +27,7 @@ const FilterContainer = () => {
     <>
       <div className="filter-container">
         <p className="sub-page-h1">Filter</p>
-        <TextField className="input-textfield" id="outlined" label="Name" />
-        <FormControl className="input-dropdown" id="outlined">
+        <FormControl className="input-dropdown" id="outlined" margin="normal">
           <InputLabel>Breeds</InputLabel>
           <Select
             value={selectedBreed}
@@ -38,6 +37,11 @@ const FilterContainer = () => {
             {breeds}
           </Select>
         </FormControl>
+        <TextField className="input-textfield" id="outlined" label="City" margin="normal"/>
+        <TextField className="input-textfield" id="outlined" label="State"  margin="normal"/>
+        <TextField className="input-textfield" id="outlined" label="Zip"  margin="normal"/>
+        <TextField className="input-textfield" id="outlined" label="Minimum Age"  margin="normal"/>
+        <TextField className="input-textfield" id="outlined" label="Maximum Age"  margin="normal"/>
       </div>
     </>
   );
