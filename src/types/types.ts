@@ -16,7 +16,6 @@ interface Location {
     county: string
 };
 
-
 interface UserStore {
     name: string;
     email: string;

@@ -51,6 +51,7 @@ const useDogStore = create<DogStore>(set => ({
             })
             // Step 3
             const zips = response.map((x: Dog) => x.zip_code);
+            console.log(zips)
             try {
             const zipResponse = await fetch('https://frontend-take-home-service.fetch.com/locations', {
               method: 'POST',
@@ -63,13 +64,15 @@ const useDogStore = create<DogStore>(set => ({
             const zipResults = await zipResponse.json();
             const zipExtraction = <ZipCityState>{};
             zipResults.forEach((x: Location) => {
-                const key = x.zip_code;
-                zipExtraction[key] = {
-                    'city': x.city,
-                    'state': x.state
+                // I found out that some zipcodes, when used in this endpoint, do not return a value, causing errors
+                if(x){
+                    const key = x.zip_code;
+                    zipExtraction[key] = {
+                        'city': x.city,
+                        'state': x.state
+                    }
                 }
             });
-
             set((prevState) => ({
                 zipCityState: {
                     ...prevState.zipCityState,
