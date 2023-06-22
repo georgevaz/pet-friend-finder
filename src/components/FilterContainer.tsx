@@ -12,13 +12,16 @@ const FilterContainer = () => {
   const { breedsList, fetchDogs } = useStore(useDogStore);
   const [ selectedBreed, setSelectedBreed ] = useState<string[]>(['Standard Schnauzer']);
   const [ zip, setZip ] = useState<string[]>([])
+  const [ zipNum, setZipNum ] = useState<string>('')
   const [ ageMin, setAgeMin ] = useState<string>('')
+  const [ ageMinNum, setAgeMinNum ] = useState<string>('')
   const [ ageMax, setAgeMax ] = useState<string>('')
+  const [ ageMaxNum, setAgeMaxNum ] = useState<string>('')
 
   useEffect(() => {
     fetchDogs({
       breeds: selectedBreed,
-      zipCodes: zip,
+      zipCodes: zip[0] ? zip : [], // If user empties out the zip input, it passes a query param of [] as oppose to ['']
       ageMin,
       ageMax,
     });
@@ -48,12 +51,33 @@ const FilterContainer = () => {
     );
   };
 
+  const onChangeZip = (e: FocusEvent<HTMLInputElement>) => {
+    const regex = /^[0-9\b]+$/;
+    if ((e.target.value === "" || regex.test(e.target.value))) {
+      setZipNum(e.target.value);
+    }
+  };
+
   const onUnfocusMinAge = (e: FocusEvent<HTMLInputElement>) => {
     setAgeMin(e.target.value);
   };
 
+  const onChangeMinAge = (e: FocusEvent<HTMLInputElement>) => {
+    const regex = /^[0-9\b]+$/;
+    if (e.target.value === "" || regex.test(e.target.value)) {
+      setAgeMinNum(e.target.value);
+    }
+  };
+  
   const onUnfocusMaxAge = (e: FocusEvent<HTMLInputElement>) => {
     setAgeMax(e.target.value);
+  };
+  
+  const onChangeMaxAge = (e: FocusEvent<HTMLInputElement>) => {
+    const regex = /^[0-9\b]+$/;
+    if (e.target.value === "" || regex.test(e.target.value)) {
+      setAgeMaxNum(e.target.value);
+    }
   };
 
   return (
@@ -73,9 +97,9 @@ const FilterContainer = () => {
         </FormControl>
         <TextField className="input-textfield" label="City" margin="normal"/>
         <TextField className="input-textfield" label="State"  margin="normal"/>
-        <TextField className="input-textfield" label="Zip"  margin="normal" onBlur={onUnfocusZip}/>
-        <TextField className="input-textfield" label="Minimum Age"  margin="normal" onBlur={onUnfocusMinAge}/>
-        <TextField className="input-textfield" label="Maximum Age"  margin="normal" onBlur={onUnfocusMaxAge}/>
+        <TextField className="input-textfield" label="Zip"  margin="normal" value={zipNum} onBlur={onUnfocusZip} onChange={onChangeZip}/>
+        <TextField className="input-textfield" label="Minimum Age" margin="normal" value={ageMinNum} onBlur={onUnfocusMinAge} onChange={onChangeMinAge}/>
+        <TextField className="input-textfield" label="Maximum Age" margin="normal" value={ageMaxNum} onBlur={onUnfocusMaxAge} onChange={onChangeMaxAge}/>
       </div>
     </>
   );
