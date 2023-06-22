@@ -249,7 +249,7 @@ $main-container-height: calc(100vh - $navbar-height * 2);
     &.MuiMenuItem-root {
         background-color: $white;
         &.MuiMenuItem-root.Mui-selected {
-            background-color: rgba($white-dark, 0.5);
+            background-color: rgba($primary-light, 0.5);
         }
         &.MuiMenuItem-root:hover {
             background-color: $white-dark;

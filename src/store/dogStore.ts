@@ -51,7 +51,6 @@ const useDogStore = create<DogStore>(set => ({
             })
             // Step 3
             const zips = response.map((x: Dog) => x.zip_code);
-            console.log(zips)
             try {
             const zipResponse = await fetch('https://frontend-take-home-service.fetch.com/locations', {
               method: 'POST',

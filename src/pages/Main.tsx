@@ -9,14 +9,14 @@ const Main = () => {
 
   useEffect(() => {
     fetchBreeds();
-    fetchDogs({
-      breeds: ['Standard Schnauzer'],
-      zipCodes: [],
-      ageMin: 1,
-      ageMax: 6,
-      size: 10,
-      from: 0,
-    });
+    // fetchDogs({
+    //   breeds: ['Standard Schnauzer'],
+    //   zipCodes: [],
+    //   ageMin: 1,
+    //   ageMax: 6,
+    //   size: 10,
+    //   from: 0,
+    // });
   }, []);
   
   return(

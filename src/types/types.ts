@@ -39,10 +39,10 @@ interface CityState {
 type DogSearchParams = { 
     breeds?: string[], 
     zipCodes?: string[], 
-    ageMin?: number, 
-    ageMax?: number, 
-    size?: number, 
-    from?: number, 
+    ageMin?: string, 
+    ageMax?: string, 
+    size?: string, 
+    from?: string, 
     sort?: string
 }
 
