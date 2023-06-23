@@ -9,12 +9,19 @@ import useDogStore from "../store/dogStore";
 
 
 const FilterContainer = () => {
-  const { breedsList, zips, fetchDogs, fetchLocations, resetZips } = useStore(useDogStore);
+  const { breedsList, zips, fetchDogs, fetchLocations } = useStore(useDogStore);
+  
   const [ selectedBreed, setSelectedBreed ] = useState<string[]>(['Standard Schnauzer']);
+  
+  const [city, setCity] = useState<string>('');
+  const [states, setStates] = useState<string[]>([]);
+
   const [ zip, setZip ] = useState<string[]>([])
   const [ zipNum, setZipNum ] = useState<string>('')
+  
   const [ ageMin, setAgeMin ] = useState<string>('')
   const [ ageMinNum, setAgeMinNum ] = useState<string>('')
+  
   const [ ageMax, setAgeMax ] = useState<string>('')
   const [ ageMaxNum, setAgeMaxNum ] = useState<string>('')
 
@@ -25,7 +32,7 @@ const FilterContainer = () => {
       ageMin,
       ageMax,
     });
-  }, [selectedBreed, ageMin, ageMax, zip, zips])
+  }, [selectedBreed, ageMin, ageMax, zip, zips, city, states])
   
   const breeds = breedsList.map(x => 
     <MenuItem
@@ -45,13 +52,13 @@ const FilterContainer = () => {
   };
 
   const onUnfocusCity = (e: FocusEvent<HTMLInputElement>) => {
-    if(e.target.value) fetchLocations({ city: e.target.value });
-    else resetZips();
+    setCity(e.target.value);
+    fetchLocations({ city: e.target.value ? e.target.value : '', states });
   };
 
   const onUnfocusState = (e: FocusEvent<HTMLInputElement>) => {
-    if(e.target.value) fetchLocations({ states: [e.target.value] });
-    else resetZips();
+    setStates([e.target.value]);
+    fetchLocations({ city, states: e.target.value ? [e.target.value] : [] });
   };
   
   const onUnfocusZip = (e: FocusEvent<HTMLInputElement>) => {

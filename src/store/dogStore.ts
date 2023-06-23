@@ -123,12 +123,6 @@ const useDogStore = create<DogStore>(set => ({
           console.error(error);
         };
       },
-
-      resetZips: () =>{
-        set(() => ({
-          zips: [],
-        }));
-      }
 }));
 
 export default useDogStore;
