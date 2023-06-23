@@ -14,7 +14,7 @@ const zipping = (zipResults: Location[]) => {
       }
   });
   return zipExtraction;
-}
+};
 
 const useDogStore = create<DogStore>(set => ({
     breedsList: [],
@@ -40,11 +40,11 @@ const useDogStore = create<DogStore>(set => ({
         let queryString = '';
         for(const [key, value] of Object.entries(params)){
             if(Array.isArray(value)) value.forEach(val => queryString += `${key}[]=${val}&`);
-            else queryString += `${key}=${value}&`
+            else if (value) queryString += `${key}=${value}&`
         }
         const baseUrl = 'https://frontend-take-home-service.fetch.com/dogs/search';
         const url = `${baseUrl}${queryString ? `?${queryString}` : ''}`;
-        
+        console.log(url)
         // Step 1
         try {
           const response = await fetch(url, {
@@ -122,6 +122,11 @@ const useDogStore = create<DogStore>(set => ({
         } catch (error) {
           console.error(error);
         };
+      },
+      resetZips: () => {
+        set(() => ({
+          zips: []
+        }));
       },
 }));
 

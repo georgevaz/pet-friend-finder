@@ -59,7 +59,7 @@ type DogSearchParams = {
 }
 
 type LocationSearchParams = { 
-    city?: string, 
+    city?: string | undefined, 
     states?: string[] | undefined[], 
     geoBoundingBox?: GeoBoundingBox
     size?: number,
@@ -82,5 +82,6 @@ interface DogStore {
     fetchBreeds: () => void;
     fetchDogs: (params: DogSearchParams) => void;
     fetchLocations: (params: LocationSearchParams) => void;
+    resetZips: () => void;
 }
 export type { UserStore, DogStore, DogSearchResult, Dog, Location, DogSearchParams, ZipCityState };
