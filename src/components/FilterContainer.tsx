@@ -9,7 +9,7 @@ import useDogStore from "../store/dogStore";
 
 
 const FilterContainer = () => {
-  const { breedsList, fetchDogs } = useStore(useDogStore);
+  const { breedsList, zips, fetchDogs, fetchLocations, resetZips } = useStore(useDogStore);
   const [ selectedBreed, setSelectedBreed ] = useState<string[]>(['Standard Schnauzer']);
   const [ zip, setZip ] = useState<string[]>([])
   const [ zipNum, setZipNum ] = useState<string>('')
@@ -21,11 +21,11 @@ const FilterContainer = () => {
   useEffect(() => {
     fetchDogs({
       breeds: selectedBreed,
-      zipCodes: zip[0] ? zip : [], // If user empties out the zip input, it passes a query param of [] as oppose to ['']
+      zipCodes: zip[0] ? zip : zips ? zips : [], // If user empties out the zip input, it passes a query param of [] as oppose to ['']
       ageMin,
       ageMax,
     });
-  }, [selectedBreed, ageMin, ageMax, zip])
+  }, [selectedBreed, ageMin, ageMax, zip, zips])
   
   const breeds = breedsList.map(x => 
     <MenuItem
@@ -42,6 +42,16 @@ const FilterContainer = () => {
       // On autofill we get a stringified value.
       typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value,
     );
+  };
+
+  const onUnfocusCity = (e: FocusEvent<HTMLInputElement>) => {
+    if(e.target.value) fetchLocations({ city: e.target.value });
+    else resetZips();
+  };
+
+  const onUnfocusState = (e: FocusEvent<HTMLInputElement>) => {
+    if(e.target.value) fetchLocations({ states: [e.target.value] });
+    else resetZips();
   };
   
   const onUnfocusZip = (e: FocusEvent<HTMLInputElement>) => {
@@ -95,8 +105,8 @@ const FilterContainer = () => {
             {breeds}
           </Select>
         </FormControl>
-        <TextField className="input-textfield" label="City" margin="normal"/>
-        <TextField className="input-textfield" label="State"  margin="normal"/>
+        <TextField className="input-textfield" label="City" margin="normal" onBlur={onUnfocusCity}/>
+        <TextField className="input-textfield" label="State"  margin="normal" onBlur={onUnfocusState}/>
         <TextField className="input-textfield" label="Zip"  margin="normal" value={zipNum} onBlur={onUnfocusZip} onChange={onChangeZip}/>
         <TextField className="input-textfield" label="Minimum Age" margin="normal" value={ageMinNum} onBlur={onUnfocusMinAge} onChange={onChangeMinAge}/>
         <TextField className="input-textfield" label="Maximum Age" margin="normal" value={ageMaxNum} onBlur={onUnfocusMaxAge} onChange={onChangeMaxAge}/>

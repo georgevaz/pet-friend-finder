@@ -34,6 +34,18 @@ interface ZipCityState {
 interface CityState {
     city: string
     state: string
+};
+
+interface GeoBoundingBox {
+    top?: LatLon,
+    left?: LatLon,
+    bottom?: LatLon,
+    right?: LatLon,
+};
+
+type LatLon = {
+    lat: number,
+    lon: number,
 }
 
 type DogSearchParams = { 
@@ -41,9 +53,17 @@ type DogSearchParams = {
     zipCodes?: string[], 
     ageMin?: string, 
     ageMax?: string, 
-    size?: string, 
+    size?: number, 
     from?: string, 
     sort?: string
+}
+
+type LocationSearchParams = { 
+    city?: string, 
+    states?: string[] | undefined[], 
+    geoBoundingBox?: GeoBoundingBox
+    size?: number,
+    from?: string,
 }
 
 type DogSearchResult = {
@@ -57,8 +77,11 @@ interface DogStore {
     breedsList: string[];
     dogSearchResults: Dog[];
     zipCityState: ZipCityState;
+    zips: string[];
 
     fetchBreeds: () => void;
     fetchDogs: (params: DogSearchParams) => void;
+    fetchLocations: (params: LocationSearchParams) => void;
+    resetZips: () => void;
 }
-export type { UserStore, DogStore, DogSearchResult, Dog, Location, DogSearchParams, ZipCityState, CityState };
+export type { UserStore, DogStore, DogSearchResult, Dog, Location, DogSearchParams, ZipCityState };
