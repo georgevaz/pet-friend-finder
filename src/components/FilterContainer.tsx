@@ -26,12 +26,12 @@ const FilterContainer = () => {
   const [ ageMaxNum, setAgeMaxNum ] = useState<string>('')
 
   useEffect(() => {
-    console.log(zips)
     fetchDogs({
       breeds: selectedBreed,
       zipCodes: zip[0] ? zip : zips ? zips : [], // If user empties out the zip input, it passes a query param of [] as oppose to ['']
       ageMin,
       ageMax,
+      size: 8,
     });
   }, [selectedBreed, ageMin, ageMax, zip, zips, city, states])
   

@@ -44,7 +44,6 @@ const useDogStore = create<DogStore>(set => ({
         }
         const baseUrl = 'https://frontend-take-home-service.fetch.com/dogs/search';
         const url = `${baseUrl}${queryString ? `?${queryString}` : ''}`;
-        console.log(url)
         // Step 1
         try {
           const response = await fetch(url, {
@@ -52,7 +51,7 @@ const useDogStore = create<DogStore>(set => ({
             credentials: 'include'
           });
           const dogsResponse: DogSearchResult = await response.json();
-          
+          // console.log(dogsResponse.next)
           // Step 2
           try {
             const fetchResponse = await fetch('https://frontend-take-home-service.fetch.com/dogs', {
