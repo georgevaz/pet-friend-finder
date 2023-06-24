@@ -34,10 +34,9 @@ const SearchContainer = () => {
   const results: React.ReactNode[] = [];
   cards.forEach((card, index) => {
     if(index % 4 === 0 || index === 0){
-      console.log(index);
       results.push(
         <div className="card-row" key={index}>
-          {cards.slice(0, 4)}
+          {cards.slice(index, index + 4)}
         </div>
       );
     };

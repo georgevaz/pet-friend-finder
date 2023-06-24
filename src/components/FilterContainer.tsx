@@ -32,6 +32,7 @@ const FilterContainer = () => {
       ageMin,
       ageMax,
       size: 8,
+      sort: 'breed:asc'
     });
   }, [selectedBreed, ageMin, ageMax, zip, zips, city, states])
   
@@ -54,12 +55,12 @@ const FilterContainer = () => {
 
   const onUnfocusCity = (e: FocusEvent<HTMLInputElement>) => {
     setCity(e.target.value);
-    e.target.value ? fetchLocations(states[0] ? { city: e.target.value, states } : { city: e.target.value }) : resetZips();
+    e.target.value ? fetchLocations(states[0] ? { city: e.target.value, states } : { city: e.target.value }) : states[0] ? fetchLocations({ states }) : resetZips();
   };
 
   const onUnfocusState = (e: FocusEvent<HTMLInputElement>) => {
     setStates([e.target.value]);
-    fetchLocations({ city, states: e.target.value ? [e.target.value] : [] });
+    e.target.value ? fetchLocations(city ? { city, states: [e.target.value] } : { states: [e.target.value]}) : city ? fetchLocations({ city }) : resetZips();
   };
   
   const onUnfocusZip = (e: FocusEvent<HTMLInputElement>) => {
