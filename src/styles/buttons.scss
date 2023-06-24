@@ -3,17 +3,24 @@
 
 @mixin button-default{
     &.MuiButton-contained {
-        background-color: $primary-color;
         font-family: $lexend;
         color: $white;
+        background-color: $primary-color;
     }
     &.MuiButton-contained:hover {
         background-color: $primary-color;
     }
+    &.MuiButton-text {
+        font-family: $lexend;
+        color: $primary-dark;
+    }
+    &.MuiButton-text:hover {
+        background: none;
+    }
 }
 
 @mixin mui-button {
-    & .MuiIconButton-root{
+    & .MuiIconButton-root {
         background-color: rgba($color: $white, $alpha: .2);
         color: #ffffff;
         position: absolute;
@@ -21,6 +28,18 @@
         right: 2.5%;
         &:hover {
             background-color: rgba($color: $white, $alpha: .4);
+        }
+    }
+}
+
+@mixin mui-search-bar-button {
+    &.MuiIconButton-root {
+        background: none;
+        &:hover {
+            background: none;
+        }
+        & .MuiTouchRipple-child {
+            background-color: $primary-light;
         }
     }
 }
@@ -36,4 +55,22 @@
 
 .button-primary-form {
     @include button-default;
+}
+
+.button-secondary {
+    @include button-default;
+}
+
+.search-bar-icon-button {
+    @include mui-search-bar-button;
+    &.MuiIconButton-root {
+        color: $primary-dark;
+    }
+}
+
+.search-bar-icon-button-active {
+    @include mui-search-bar-button;
+    &.MuiIconButton-root {
+        color: $secondary-light;
+    }
 }

@@ -45,9 +45,9 @@ const SearchContainer = () => {
 
   return(
     <>
-    <SearchBar />
     <div className="search-container">
       <div className="card-row-container">
+      <SearchBar /> 
         {results}
       </div>
     </div>
