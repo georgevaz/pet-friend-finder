@@ -1,55 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap');
-
-$lexend: 'Lexend', sans-serif;
-$syne: 'Syne', sans-serif;
-
-$primary-color: #FFA900; // Web Orange
-$primary-dark: #CF8900; // Web Orange
-$primary-light: #FFD481; // Web Orange
-$secondary-color: #300D38; // Valentino
-$secondary-dark: #120515; // Valentino
-$secondary-light: #582B63; // Valentino
-$white: #F9F8F9; // Alabaster
-$white-dark: #CDCDCD; // Alabaster
-$error: #FF4E42; 
-
-
-.hero-h1 {
-    font-family: $syne;
-    color: black;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 4.375em;
-    line-height: 1em;
-}
-
-.sub-page-h1{
-    font-family: 'Lexend';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 3em;
-}
-
-.body-h4{
-  font-family: $syne;
-  color: black;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 1.5em;
-  line-height: 1em;
-}
-
-.p-large {
-    font-family: $lexend;
-    color: black;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.5em;
-    line-height: 1.5em;
-}
+@import "./buttons.scss";
+@import "./inputs.scss";
+@import "./_colors.scss";
+@import "./_fonts.scss";
 
 $navbar-height: 90px;
 $main-container-height: calc(100vh - $navbar-height * 2);
+
+@mixin landing-elements-sizing{
+    height: 460px;
+}
 
 @mixin padding-horizontal {
     padding-left: 30px;
@@ -97,34 +56,6 @@ $main-container-height: calc(100vh - $navbar-height * 2);
     position: absolute;
     bottom: 0;
     
-}
-
-@mixin button-default{
-    &.MuiButton-contained {
-        background-color: $primary-color;
-        font-family: $lexend;
-        color: $white;
-    }
-    &.MuiButton-contained:hover {
-        background-color: $primary-color;
-    }
-}
-
-.button-primary {
-    @include button-default;
-    &.MuiButton-contained {
-        height: 48px;
-        width: 125px;
-        border-radius: 25px;
-    }
-}
-
-.button-primary-form {
-    @include button-default;
-}
-
-@mixin landing-elements-sizing{
-    height: 460px;
 }
 
 .landing-container{
@@ -176,7 +107,31 @@ $main-container-height: calc(100vh - $navbar-height * 2);
     }
 }
 
+.main-container {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 100%;
+}
+
+.search-container {
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: $navbar-height;
+}
+
+.card-row {
+    display: flex;
+    flex-direction: row;
+}
+
 .card-container {
+    @include mui-button;
     min-width: 250px;
     width: 250px;
     height: 300px;
@@ -188,104 +143,25 @@ $main-container-height: calc(100vh - $navbar-height * 2);
         width: 100%;
         cursor: pointer;
     }
-    & .MuiIconButton-root{
-        background-color: rgba($color: $white, $alpha: .2);
-        color: #ffffff;
-        position: absolute;
-        top: 2.5%;
-        right: 2.5%;
-        &:hover {
-            background-color: rgba($color: $white, $alpha: .4);
-        }
-    }
     & .card-copy-container {
+        @include card-copy;
         margin-left: 15px;
         margin-top: 4px;
-        & .card-title {
-            font-family: $lexend;
-            color: black;
-            font-weight: 700;
-            font-size: 1.5em;
-        }
-        & .card-p-description {
-            font-family: $lexend;
-            color: black;
-            font-size: 0.75em;
-            margin: 4px 0;
-        }
-        & .card-p-location {
-            font-family: $lexend;
-            color: black;
-            font-weight: 500;
-            font-size: 0.938em;
-        }
     }
-}
-
-.card-row {
-    display: flex;
-    flex-direction: row;
 }
 
 .card-row-container {
-    
-}
-
-.input-textfield, .input-dropdown {
-    & label {
-        font-family: $lexend;
-        color: $white-dark;
-    }
-    & label.Mui-focused{
-        font-family: $lexend;
-        color: $secondary-color;
-    }
-    & .MuiOutlinedInput-root {
-        &.MuiOutlinedInput-notchedOutline {
-            border-radius: 5px;
-            border-color: $white-dark;
-        }
-        &:hover .MuiOutlinedInput-notchedOutline{
-            border-color: $white-dark
-        }
-        &.Mui-focused .MuiOutlinedInput-notchedOutline{
-            border-color: $secondary-color
-        }
-    }
-}
-
-.input-drowdown-item {
-    &.MuiMenuItem-root {
-        background-color: $white;
-        &.MuiMenuItem-root.Mui-selected {
-            background-color: rgba($primary-light, 0.5);
-        }
-        &.MuiMenuItem-root:hover {
-            background-color: $white-dark;
-        }
-    }
-}
-
-.MuiPopover-root {
-    & .MuiMenu-paper{
-        background-color: $white;
-    }
-}
-
-.main-container {
+    background-color: blue;
     display: flex;
-    flex-direction: row;
-    height: 90%;
-    width: 100%;
+    flex-direction: column;
 }
 
-.search-container {
+.search-bar-container {
+    background-color: #CDCDCD;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    margin-bottom: $navbar-height;
 }
 
 .filter-container {

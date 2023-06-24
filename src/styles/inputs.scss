@@ -1,0 +1,43 @@
+@import "./_colors.scss";
+@import "./_fonts.scss";
+
+.input-textfield, .input-dropdown {
+    & label {
+        font-family: $lexend;
+        color: $white-dark;
+    }
+    & label.Mui-focused{
+        font-family: $lexend;
+        color: $secondary-color;
+    }
+    & .MuiOutlinedInput-root {
+        &.MuiOutlinedInput-notchedOutline {
+            border-radius: 5px;
+            border-color: $white-dark;
+        }
+        &:hover .MuiOutlinedInput-notchedOutline{
+            border-color: $white-dark
+        }
+        &.Mui-focused .MuiOutlinedInput-notchedOutline{
+            border-color: $secondary-color
+        }
+    }
+}
+
+.input-drowdown-item {
+    &.MuiMenuItem-root {
+        background-color: $white;
+        &.MuiMenuItem-root.Mui-selected {
+            background-color: rgba($primary-light, 0.5);
+        }
+        &.MuiMenuItem-root:hover {
+            background-color: $white-dark;
+        }
+    }
+}
+
+.MuiPopover-root {
+    & .MuiMenu-paper{
+        background-color: $white;
+    }
+}

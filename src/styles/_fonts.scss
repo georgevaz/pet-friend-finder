@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap');
+$lexend: 'Lexend', sans-serif;
+$syne: 'Syne', sans-serif;
+
+.hero-h1 {
+    font-family: $syne;
+    color: black;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 4.375em;
+    line-height: 1em;
+}
+
+.sub-page-h1{
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 3em;
+}
+
+.body-h4{
+  font-family: $syne;
+  color: black;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5em;
+  line-height: 1em;
+}
+
+.p-large {
+    font-family: $lexend;
+    color: black;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+
+@mixin card-copy {
+    & .card-title {
+        font-family: $lexend;
+        color: black;
+        font-weight: 700;
+        font-size: 1.5em;
+    }
+    & .card-p-description {
+        font-family: $lexend;
+        color: black;
+        font-size: 0.75em;
+        margin: 4px 0;
+    }
+    & .card-p-location {
+        font-family: $lexend;
+        color: black;
+        font-weight: 500;
+        font-size: 0.938em;
+    }
+}

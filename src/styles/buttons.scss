@@ -1,0 +1,39 @@
+@import "./_colors.scss";
+@import "./_fonts.scss";
+
+@mixin button-default{
+    &.MuiButton-contained {
+        background-color: $primary-color;
+        font-family: $lexend;
+        color: $white;
+    }
+    &.MuiButton-contained:hover {
+        background-color: $primary-color;
+    }
+}
+
+@mixin mui-button {
+    & .MuiIconButton-root{
+        background-color: rgba($color: $white, $alpha: .2);
+        color: #ffffff;
+        position: absolute;
+        top: 2.5%;
+        right: 2.5%;
+        &:hover {
+            background-color: rgba($color: $white, $alpha: .4);
+        }
+    }
+}
+
+.button-primary {
+    @include button-default;
+    &.MuiButton-contained {
+        height: 48px;
+        width: 125px;
+        border-radius: 25px;
+    }
+}
+
+.button-primary-form {
+    @include button-default;
+}

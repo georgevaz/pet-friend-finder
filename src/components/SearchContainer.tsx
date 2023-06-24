@@ -3,6 +3,7 @@ import useDogStore from "../store/dogStore";
 import { useStore } from "zustand";
 import { Card, CardMedia, IconButton } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import SearchBar from "./SearchBar";
 
 const SearchContainer = () => {
   const { dogSearchResults, zipCityState } = useStore(useDogStore);
@@ -44,6 +45,7 @@ const SearchContainer = () => {
 
   return(
     <>
+    <SearchBar />
     <div className="search-container">
       <div className="card-row-container">
         {results}
