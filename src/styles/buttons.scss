@@ -61,10 +61,16 @@
     @include button-default;
 }
 
+.button-secondary-active {
+    @include button-default;
+    color: $secondary-light !important;
+}
+
 .search-bar-icon-button {
     @include mui-search-bar-button;
     &.MuiIconButton-root {
         color: $primary-dark;
+        transition: color .2s;
     }
 }
 
@@ -72,5 +78,6 @@
     @include mui-search-bar-button;
     &.MuiIconButton-root {
         color: $secondary-light;
+        transition: color .2s;
     }
 }
