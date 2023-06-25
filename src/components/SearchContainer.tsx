@@ -4,32 +4,24 @@ import { useStore } from "zustand";
 import { Card, CardMedia, IconButton } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SearchBar from "./SearchBar";
+import DogCard from "./DogCard";
 
 const SearchContainer = () => {
   const { dogSearchResults, zipCityState } = useStore(useDogStore);
 
   const cards = dogSearchResults.map(dog => {
     return(
-      <Card key={dog.id} className='card-container'>
-        <IconButton onClick={() => console.log('yo')}>
-          <FavoriteIcon/>
-        </IconButton>
-        <CardMedia
-          component='img'
-          image={dog.img}
-          onClick={() => console.log('ENHANCE')}
-          />
-        <div className='card-copy-container'>
-          <p className="card-title">{dog.name}</p>
-          <p className="card-p-description">
-            {dog.breed}
-            <br/>
-            Age: {dog.age} years
-          </p>
-          <p className="card-p-location">{zipCityState[dog.zip_code] ? `${zipCityState[dog.zip_code].city}, ` : 'Zip Code: '}{zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].state : dog.zip_code}</p>
-        </div>
-      </Card>
-    )
+      <DogCard 
+        id={dog.id}
+        img={dog.img}
+        name={dog.name}
+        breed={dog.breed}
+        age={dog.age}
+        zip={dog.zip_code}
+        city={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].city : null}
+        state={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].state : null}
+      />
+    );
   });
 
   const results: React.ReactNode[] = [];

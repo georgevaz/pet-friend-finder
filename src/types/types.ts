@@ -73,6 +73,17 @@ type DogSearchResult = {
     prev?: string,
 }
 
+type DogCardProps = {
+    id: string,
+    img: string, 
+    name: string,
+    breed: string, 
+    age: number,
+    zip: string,
+    city: string | null,
+    state: string | null,
+}
+
 type Sort = 'ascend' | 'descend' | 'off';
 
 interface DogStore {
@@ -90,4 +101,5 @@ interface DogStore {
     resetZips: () => void;
     setSortState: (sort: Sort, next: Sort) => void;
 }
-export type { UserStore, DogStore, DogSearchResult, Dog, Location, DogSearchParams, ZipCityState, Sort };
+
+export type { UserStore, DogStore, DogSearchResult, Dog, Location, DogSearchParams, ZipCityState, Sort, DogCardProps };

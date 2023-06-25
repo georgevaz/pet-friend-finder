@@ -17,12 +17,16 @@
     &.MuiButton-text:hover {
         background: none;
     }
+    &.MuiButton-text{
+        & .MuiTouchRipple-child {
+            background-color: rgba($color: $primary-light, $alpha: .5);
+        }
+    }
 }
 
 @mixin mui-button {
     & .MuiIconButton-root {
         background-color: rgba($color: $white, $alpha: .2);
-        color: #ffffff;
         position: absolute;
         top: 2.5%;
         right: 2.5%;
@@ -37,10 +41,16 @@
         background: none;
         &:hover {
             background: none;
-        }
+        } 
         & .MuiTouchRipple-child {
             background-color: $primary-light;
         }
+    }
+}
+
+@mixin icon-transition {
+    &.MuiIconButton-root {
+        transition: color .3s;
     }
 }
 
@@ -68,16 +78,30 @@
 
 .search-bar-icon-button {
     @include mui-search-bar-button;
+    @include icon-transition;
     &.MuiIconButton-root {
         color: $primary-dark;
-        transition: color .2s;
     }
 }
 
 .search-bar-icon-button-active {
     @include mui-search-bar-button;
+    @include icon-transition;
     &.MuiIconButton-root {
         color: $secondary-light;
-        transition: color .2s;
+    }
+}
+
+.favorite-icon {
+    @include icon-transition;
+    &.MuiIconButton-root {
+        color: $white;
+    }
+}
+
+.favorite-icon-active {
+    @include icon-transition;
+    &.MuiIconButton-root {
+        color: $alert;
     }
 }
