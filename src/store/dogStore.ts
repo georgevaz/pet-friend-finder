@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { DogSearchResult, DogStore, Dog, Location, ZipCityState } from '../types/types';
+import { DogSearchResult, DogStore, Dog, Location, ZipCityState, Sort } from '../types/types';
 
 const zipping = (zipResults: Location[]) => {
   const zipExtraction = <ZipCityState>{};
@@ -21,6 +21,11 @@ const useDogStore = create<DogStore>(set => ({
     dogSearchResults: [],
     zipCityState: <ZipCityState>{},
     zips: [],
+    sortState: {
+      'ascend': false,
+      'descend': false,
+      'off': true,
+    },
 
     fetchBreeds: async () => {
         try {
@@ -44,6 +49,7 @@ const useDogStore = create<DogStore>(set => ({
         }
         const baseUrl = 'https://frontend-take-home-service.fetch.com/dogs/search';
         const url = `${baseUrl}${queryString ? `?${queryString}` : ''}`;
+        console.log(url)
         // Step 1
         try {
           const response = await fetch(url, {
@@ -51,7 +57,7 @@ const useDogStore = create<DogStore>(set => ({
             credentials: 'include'
           });
           const dogsResponse: DogSearchResult = await response.json();
-          // console.log(dogsResponse.next)
+          
           // Step 2
           try {
             const fetchResponse = await fetch('https://frontend-take-home-service.fetch.com/dogs', {
@@ -126,6 +132,15 @@ const useDogStore = create<DogStore>(set => ({
         set(() => ({
           zips: []
         }));
+      },
+      setSortState: (sort, next) => {
+        set((prevState) => ({
+          sortState:{
+            ...prevState.sortState,
+            [sort]: false,
+            [next]: true,
+          }
+        }))
       },
 }));
 

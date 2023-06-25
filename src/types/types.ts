@@ -73,15 +73,21 @@ type DogSearchResult = {
     prev?: string,
 }
 
+type Sort = 'ascend' | 'descend' | 'off';
+
 interface DogStore {
     breedsList: string[];
     dogSearchResults: Dog[];
     zipCityState: ZipCityState;
     zips: string[];
+    sortState: {
+        [key in Sort]: boolean
+    }
 
     fetchBreeds: () => void;
     fetchDogs: (params: DogSearchParams) => void;
     fetchLocations: (params: LocationSearchParams) => void;
     resetZips: () => void;
+    setSortState: (sort: Sort, next: Sort) => void;
 }
-export type { UserStore, DogStore, DogSearchResult, Dog, Location, DogSearchParams, ZipCityState };
+export type { UserStore, DogStore, DogSearchResult, Dog, Location, DogSearchParams, ZipCityState, Sort };

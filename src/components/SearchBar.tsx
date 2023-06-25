@@ -7,17 +7,15 @@ import { IconButton } from "@mui/material";
 import { Button } from "@mui/material";
 import FilterContainer from "../components/FilterContainer";
 import Drawer from '@mui/material/Drawer';
+import { Sort } from "../types/types";
+import { useStore } from "zustand";
+import useDogStore from "../store/dogStore";
 
-type Sort = 'ascend' | 'descend' | 'off';
 
-const SearchBar = () =>{
+const SearchBar = () => {
+  const { sortState, setSortState } = useStore(useDogStore);
   const [ drawerState, setDrawerState ] = useState(false);
   const [ favoritesState, setFavoritesState ] = useState(false);
-  const [ sortState, setSortState ] = useState({
-    'ascend': false,
-    'descend': false,
-    'off': true,
-  });
   
   const toggleDrawer =
     (open: boolean) => () => {
@@ -29,12 +27,9 @@ const SearchBar = () =>{
       setFavoritesState(!open);
     };
 
-  const toggleSort = (sort: string, next: string) => () => {
-    setSortState({
-      ...sortState,
-      [sort]: false,
-      [next]: true,
-    });
+  const toggleSort = (sort: Sort, next: Sort) => () => {
+    setSortState(sort, next);
+    console.log(sort, next)
   };
 
   return (

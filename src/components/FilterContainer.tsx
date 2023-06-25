@@ -9,7 +9,7 @@ import useDogStore from "../store/dogStore";
 
 
 const FilterContainer = () => {
-  const { breedsList, zips, fetchDogs, fetchLocations, resetZips } = useStore(useDogStore);
+  const { breedsList, zips, sortState, fetchDogs, fetchLocations, resetZips } = useStore(useDogStore);
   
   const [ selectedBreed, setSelectedBreed ] = useState<string[]>([]);
   
@@ -32,9 +32,9 @@ const FilterContainer = () => {
       ageMin,
       ageMax,
       size: 8,
-      sort: 'breed:asc'
+      sort: sortState['off'] ? '' : sortState['ascend'] ? 'breed:asc' : 'breed:desc',
     });
-  }, [selectedBreed, ageMin, ageMax, zip, zips, city, states])
+  }, [selectedBreed, ageMin, ageMax, zip, zips, city, states, sortState])
   
   const breeds = breedsList.map(x => 
     <MenuItem

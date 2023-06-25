@@ -12,7 +12,6 @@ const Main = () => {
       breeds: [],
       zipCodes: [], // If user empties out the zip input, it passes a query param of [] as oppose to ['']
       size: 8,
-      sort: 'breed:asc'
     });
   }, []);
 
