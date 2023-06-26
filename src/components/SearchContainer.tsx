@@ -1,17 +1,38 @@
 import React, { useEffect, useState } from "react";
 import useDogStore from "../store/dogStore";
 import { useStore } from "zustand";
-import { Card, CardMedia, IconButton } from "@mui/material";
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import SearchBar from "./SearchBar";
 import DogCard from "./DogCard";
 
 const SearchContainer = () => {
-  const { dogSearchResults, zipCityState } = useStore(useDogStore);
+  const { favoriteDogsResults, favoriteDogsIds, favoritesContainerState, dogSearchResults, zipCityState, fetchFavorites } = useStore(useDogStore);
 
-  const cards = dogSearchResults.map(dog => {
+  useEffect(() => {
+    fetchFavorites(favoriteDogsIds);
+  }, [favoriteDogsIds])
+
+  const cards = favoritesContainerState
+  ?
+  favoriteDogsResults.map(dog => {
     return(
-      <DogCard 
+      <DogCard
+        key={dog.id}
+        id={dog.id}
+        img={dog.img}
+        name={dog.name}
+        breed={dog.breed}
+        age={dog.age}
+        zip={dog.zip_code}
+        city={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].city : null}
+        state={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].state : null}
+      />
+    );
+  })
+  :
+  dogSearchResults.map(dog => {
+    return(
+      <DogCard
+        key={dog.id}
         id={dog.id}
         img={dog.img}
         name={dog.name}

@@ -66,8 +66,8 @@ type LocationSearchParams = {
     from?: string,
 }
 
-type DogSearchResult = {
-    resultIds: string[],
+type DogSearch = {
+    resultIds: Dog['id'][],
     total: number,
     next?: string,
     prev?: string,
@@ -87,19 +87,26 @@ type DogCardProps = {
 type Sort = 'ascend' | 'descend' | 'off';
 
 interface DogStore {
-    breedsList: string[];
+    breedsList: Dog['breed'][];
     dogSearchResults: Dog[];
     zipCityState: ZipCityState;
     zips: string[];
     sortState: {
         [key in Sort]: boolean
-    }
+    };
+    favoriteDogsIds: Dog['id'][];
+    favoriteDogsResults: Dog[];
+    favoritesContainerState: boolean;
 
     fetchBreeds: () => void;
     fetchDogs: (params: DogSearchParams) => void;
     fetchLocations: (params: LocationSearchParams) => void;
     resetZips: () => void;
     setSortState: (sort: Sort, next: Sort) => void;
+    addFavoriteDog: (id: Dog['id']) => void;
+    removeFavoriteDog: (id: Dog['id'], prevState: Dog['id'][]) => void;
+    fetchFavorites: (id: Dog['id'][]) => void;
+    toggleFavoritesContainer: () => void;
 }
 
-export type { UserStore, DogStore, DogSearchResult, Dog, Location, DogSearchParams, ZipCityState, Sort, DogCardProps };
+export type { UserStore, DogStore, DogSearch, Dog, Location, DogSearchParams, ZipCityState, Sort, DogCardProps };

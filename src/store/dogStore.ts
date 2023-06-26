@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { DogSearchResult, DogStore, Dog, Location, ZipCityState, Sort } from '../types/types';
+import { DogSearch, DogStore, Dog, Location, ZipCityState } from '../types/types';
 
-const zipping = (zipResults: Location[]) => {
+const zipping = (zipResults: Location[]): ZipCityState => {
   const zipExtraction = <ZipCityState>{};
   zipResults.forEach((zip: Location) => {
       // I found out that some zipcodes, when used in this endpoint, do not return a value, causing errors
@@ -16,6 +16,17 @@ const zipping = (zipResults: Location[]) => {
   return zipExtraction;
 };
 
+const idToDog = (ids: DogSearch['resultIds'] | Dog['id'][] ):Promise<Response> => {
+  return fetch('https://frontend-take-home-service.fetch.com/dogs', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(ids),
+    credentials: 'include',
+  });
+};
+
 const useDogStore = create<DogStore>(set => ({
     breedsList: [],
     dogSearchResults: [],
@@ -26,6 +37,9 @@ const useDogStore = create<DogStore>(set => ({
       'descend': false,
       'off': true,
     },
+    favoriteDogsIds: [],
+    favoriteDogsResults: [],
+    favoritesContainerState: false,
 
     fetchBreeds: async () => {
         try {
@@ -41,6 +55,7 @@ const useDogStore = create<DogStore>(set => ({
           console.error(error);
         }
     },
+
     fetchDogs: async (params) => {
         let queryString = '';
         for(const [key, value] of Object.entries(params)){
@@ -49,25 +64,18 @@ const useDogStore = create<DogStore>(set => ({
         }
         const baseUrl = 'https://frontend-take-home-service.fetch.com/dogs/search';
         const url = `${baseUrl}${queryString ? `?${queryString}` : ''}`;
-        console.log(url)
+
         // Step 1
         try {
           const response = await fetch(url, {
             method: 'GET',
             credentials: 'include'
           });
-          const dogsResponse: DogSearchResult = await response.json();
+          const dogsResponse: DogSearch = await response.json();
           
           // Step 2
           try {
-            const fetchResponse = await fetch('https://frontend-take-home-service.fetch.com/dogs', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(dogsResponse.resultIds),
-              credentials: 'include',
-            });
+            const fetchResponse = await idToDog(dogsResponse.resultIds);
             const response = await fetchResponse.json();
             set({
                 dogSearchResults: response
@@ -103,6 +111,7 @@ const useDogStore = create<DogStore>(set => ({
           localStorage.clear();
         };
       },
+
       fetchLocations: async (params) => {
         try {
           const fetchResponse = await fetch('https://frontend-take-home-service.fetch.com/locations/search', {
@@ -121,18 +130,20 @@ const useDogStore = create<DogStore>(set => ({
                 ...zipExtraction
             }
           }));
-          set(() => ({
+          set(({
             zips: Object.keys(zipExtraction),
           }));
         } catch (error) {
           console.error(error);
         };
       },
+
       resetZips: () => {
-        set(() => ({
+        set(({
           zips: []
         }));
       },
+
       setSortState: (sort, next) => {
         set((prevState) => ({
           sortState:{
@@ -141,6 +152,35 @@ const useDogStore = create<DogStore>(set => ({
             [next]: true,
           }
         }))
+      },
+
+      addFavoriteDog: (id) => {
+        set((prevState) => ({
+          favoriteDogsIds: [...prevState.favoriteDogsIds, id],
+        }))
+      },
+
+      removeFavoriteDog: (id, favoriteDogs) => {
+        const index = favoriteDogs.indexOf(id);
+        const copy = [...favoriteDogs];
+        if (index > -1) copy.splice(index, 1);
+        set(({
+          favoriteDogsIds: copy,
+        }))
+      },
+
+      fetchFavorites: async (favoriteDogs) => {
+        const fetchResponse = await idToDog(favoriteDogs);
+        const response = await fetchResponse.json();
+        set({
+            favoriteDogsResults: response
+        })
+      },
+
+      toggleFavoritesContainer: () => {
+        set((prevState) => ({
+          favoritesContainerState: !prevState.favoritesContainerState,
+        }));
       },
 }));
 

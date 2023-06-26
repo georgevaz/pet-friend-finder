@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import FilterAltRoundedIcon from '@mui/icons-material/FilterAltRounded';
@@ -13,24 +13,22 @@ import useDogStore from "../store/dogStore";
 
 
 const SearchBar = () => {
-  const { sortState, setSortState } = useStore(useDogStore);
+  const { favoritesContainerState, sortState, setSortState, toggleFavoritesContainer } = useStore(useDogStore);
   const [ drawerState, setDrawerState ] = useState(false);
-  const [ favoritesState, setFavoritesState ] = useState(false);
-  
+
   const toggleDrawer =
     (open: boolean) => () => {
       setDrawerState(open);
     };
 
-  const toggleFavorites =
-    (open: boolean) => () => {
-      setFavoritesState(!open);
+  const toggleFavorites = () => {
+      toggleFavoritesContainer();
     };
 
-  const toggleSort = (sort: Sort, next: Sort) => () => {
-    setSortState(sort, next);
-    console.log(sort, next)
-  };
+  const toggleSort = 
+    (sort: Sort, next: Sort) => () => {
+      setSortState(sort, next);
+    };
 
   return (
     <>
@@ -65,7 +63,7 @@ const SearchBar = () => {
           <IconButton className={drawerState ? "search-bar-icon-button-active" : "search-bar-icon-button"} onClick={toggleDrawer(true)}>
             <FilterAltRoundedIcon />
           </IconButton>
-          <IconButton className={favoritesState ? "search-bar-icon-button-active" : "search-bar-icon-button"} onClick={toggleFavorites(favoritesState)}>
+          <IconButton className={favoritesContainerState ? "search-bar-icon-button-active" : "search-bar-icon-button"} onClick={toggleFavorites}>
             <FavoriteIcon />
           </IconButton>
         </div>
