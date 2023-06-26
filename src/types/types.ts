@@ -82,6 +82,7 @@ type DogCardProps = {
     zip: string,
     city: string | null,
     state: string | null,
+    favorited: boolean,
 }
 
 type Sort = 'ascend' | 'descend' | 'off';

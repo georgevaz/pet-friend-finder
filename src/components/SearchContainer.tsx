@@ -9,6 +9,7 @@ const SearchContainer = () => {
 
   useEffect(() => {
     fetchFavorites(favoriteDogsIds);
+    console.log(favoriteDogsIds)
   }, [favoriteDogsIds])
 
   const cards = favoritesContainerState
@@ -25,6 +26,7 @@ const SearchContainer = () => {
         zip={dog.zip_code}
         city={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].city : null}
         state={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].state : null}
+        favorited={favoriteDogsIds.includes(dog.id)}
       />
     );
   })
@@ -41,6 +43,7 @@ const SearchContainer = () => {
         zip={dog.zip_code}
         city={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].city : null}
         state={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].state : null}
+        favorited={favoriteDogsIds.includes(dog.id)}
       />
     );
   });
