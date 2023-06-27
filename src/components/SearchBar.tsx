@@ -40,29 +40,39 @@ const SearchBar = () => {
       >
         <FilterContainer />
       </Drawer>
-      <div className="search-bar-container">{
-        sortState['off'] ? 
-          <Button variant="text" className="button-secondary" onClick={toggleSort('off', 'ascend')}>
-            Sort Breed
-            <ArrowDropUpRoundedIcon />
-          </Button> 
-        :
-          sortState['ascend'] ?
-            <Button variant="text" className="button-secondary-active" onClick={toggleSort('ascend', 'descend')}>
+      <div className="search-bar-container" style={favoritesContainerState ? {justifyContent: 'flex-end'} : {}}>
+        {
+          favoritesContainerState ? 
+          <>
+          </>
+          :
+          sortState['off'] ? 
+            <Button variant="text" className="button-secondary" onClick={toggleSort('off', 'ascend')}>
               Sort Breed
               <ArrowDropUpRoundedIcon />
             </Button> 
           :
-            <Button variant="text" className="button-secondary-active" onClick={toggleSort('descend', 'off')}>
-              Sort Breed
-              <ArrowDropDownRoundedIcon />
-            </Button> 
-      }
-
-        <div>
-          <IconButton className={drawerState ? "search-bar-icon-button-active" : "search-bar-icon-button"} onClick={toggleDrawer(true)}>
-            <FilterAltRoundedIcon />
-          </IconButton>
+            sortState['ascend'] ?
+              <Button variant="text" className="button-secondary-active" onClick={toggleSort('ascend', 'descend')}>
+                Sort Breed
+                <ArrowDropUpRoundedIcon />
+              </Button> 
+            :
+              <Button variant="text" className="button-secondary-active" onClick={toggleSort('descend', 'off')}>
+                Sort Breed
+                <ArrowDropDownRoundedIcon />
+              </Button>                  
+        }
+        <div style={{justifySelf: 'center', alignSelf: 'center'}}>
+          {
+            favoritesContainerState ?
+            <>
+            </>
+            :
+            <IconButton className={drawerState ? "search-bar-icon-button-active" : "search-bar-icon-button"} onClick={toggleDrawer(true)}>
+              <FilterAltRoundedIcon />
+            </IconButton>
+          }
           <IconButton className={favoritesContainerState ? "search-bar-icon-button-active" : "search-bar-icon-button"} onClick={toggleFavorites}>
             <FavoriteIcon />
           </IconButton>

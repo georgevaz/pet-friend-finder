@@ -157,7 +157,7 @@ const useDogStore = create<DogStore>(set => ({
       addFavoriteDog: (id) => {
         set((prevState) => ({
           favoriteDogsIds: [...prevState.favoriteDogsIds, id],
-        }))
+        }));
       },
 
       removeFavoriteDog: (id, favoriteDogs) => {
@@ -166,7 +166,7 @@ const useDogStore = create<DogStore>(set => ({
         if (index > -1) copy.splice(index, 1);
         set(({
           favoriteDogsIds: copy,
-        }))
+        }));
       },
 
       fetchFavorites: async (favoriteDogs) => {

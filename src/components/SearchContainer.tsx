@@ -8,8 +8,7 @@ const SearchContainer = () => {
   const { favoriteDogsResults, favoriteDogsIds, favoritesContainerState, dogSearchResults, zipCityState, fetchFavorites } = useStore(useDogStore);
 
   useEffect(() => {
-    fetchFavorites(favoriteDogsIds);
-    console.log(favoriteDogsIds)
+    if(favoriteDogsIds[0]) fetchFavorites(favoriteDogsIds);
   }, [favoriteDogsIds])
 
   const cards = favoritesContainerState
@@ -26,7 +25,6 @@ const SearchContainer = () => {
         zip={dog.zip_code}
         city={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].city : null}
         state={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].state : null}
-        favorited={favoriteDogsIds.includes(dog.id)}
       />
     );
   })
@@ -43,7 +41,6 @@ const SearchContainer = () => {
         zip={dog.zip_code}
         city={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].city : null}
         state={zipCityState[dog.zip_code] ? zipCityState[dog.zip_code].state : null}
-        favorited={favoriteDogsIds.includes(dog.id)}
       />
     );
   });
@@ -62,8 +59,8 @@ const SearchContainer = () => {
   return(
     <>
     <div className="search-container">
-      <div className="card-row-container">
       <SearchBar /> 
+      <div className="card-row-container">
         {results}
       </div>
     </div>

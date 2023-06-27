@@ -5,25 +5,29 @@ import { DogCardProps } from '../types/types';
 import { useStore } from 'zustand';
 import useDogStore from '../store/dogStore';
 
-const DogCard = ( { id, img, name, breed, age, zip, city, state, favorited }: DogCardProps) => {
-  const { favoriteDogsIds, addFavoriteDog, removeFavoriteDog } = useStore(useDogStore);
+const DogCard = ( { id, img, name, breed, age, zip, city, state }: DogCardProps) => {
+  const { favoriteDogsIds, favoritesContainerState, addFavoriteDog, removeFavoriteDog } = useStore(useDogStore);
   const [ favorite, setFavorite ] = useState(false);
 
   useEffect(() => {
-    console.log(id, favorite)
-    favorite ? addFavoriteDog(id) : removeFavoriteDog(id, favoriteDogsIds);
+    if(favoriteDogsIds.includes(id)) setFavorite(true);
   }, [favorite])
 
   const handleClickFavorite = () => {
     setFavorite(!favorite);
+    !favorite ? addFavoriteDog(id) : removeFavoriteDog(id, favoriteDogsIds);
   };
 
   return (
     <>
       <Card key={id} className='card-container'>
-        <IconButton onClick={handleClickFavorite} className={ favorite ? 'favorite-icon-active' : 'favorite-icon' }>
-          <FavoriteIcon />
-        </IconButton>
+        {favoritesContainerState ? 
+          <></>
+          : 
+          <IconButton onClick={handleClickFavorite} className={ favorite ? 'favorite-icon-active' : 'favorite-icon' }>
+            <FavoriteIcon />
+          </IconButton>
+        }
         <CardMedia
           component='img'
           image={img}
