@@ -89,6 +89,10 @@ type Sort = 'ascend' | 'descend' | 'off';
 interface DogStore {
     breedsList: Dog['breed'][];
     dogSearchResults: Dog[];
+    extraQueries: {
+        next?: DogSearch['next'],
+        prev?: DogSearch['prev'],
+    }
     zipCityState: ZipCityState;
     zips: string[];
     sortState: {
@@ -99,7 +103,7 @@ interface DogStore {
     favoritesContainerState: boolean;
 
     fetchBreeds: () => void;
-    fetchDogs: (params: DogSearchParams) => void;
+    fetchDogs: (params: DogSearchParams, next?: DogSearch['next'], prev?: DogSearch['prev']) => void;
     fetchLocations: (params: LocationSearchParams) => void;
     resetZips: () => void;
     setSortState: (sort: Sort, next: Sort) => void;

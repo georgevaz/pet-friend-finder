@@ -30,6 +30,10 @@ const idToDog = (ids: DogSearch['resultIds'] | Dog['id'][] ):Promise<Response> =
 const useDogStore = create<DogStore>(set => ({
     breedsList: [],
     dogSearchResults: [],
+    extraQueries: {
+      next: null,
+      prev: null,
+    },
     zipCityState: <ZipCityState>{},
     zips: [],
     sortState: {
@@ -56,14 +60,25 @@ const useDogStore = create<DogStore>(set => ({
         }
     },
 
-    fetchDogs: async (params) => {
-        let queryString = '';
-        for(const [key, value] of Object.entries(params)){
-            if(Array.isArray(value)) value.forEach(val => queryString += `${key}[]=${val}&`);
-            else if (value) queryString += `${key}=${value}&`
+    fetchDogs: async (params, next?, prev?) => {
+        let url = '';
+        if(next){
+          url = 'https://frontend-take-home-service.fetch.com' + next;
+          console.log('next')
+        } else if(prev){
+          url = 'https://frontend-take-home-service.fetch.com' + prev;
+          console.log(prev)
         }
-        const baseUrl = 'https://frontend-take-home-service.fetch.com/dogs/search';
-        const url = `${baseUrl}${queryString ? `?${queryString}` : ''}`;
+        else {
+          let queryString = '';
+          for(const [key, value] of Object.entries(params)){
+              if(Array.isArray(value)) value.forEach(val => queryString += `${key}[]=${val}&`);
+              else if (value) queryString += `${key}=${value}&`
+          }
+          const baseUrl = 'https://frontend-take-home-service.fetch.com/dogs/search';
+          url = `${baseUrl}${queryString ? `?${queryString}` : ''}`;
+          console.log(params)
+        }
 
         // Step 1
         try {
@@ -72,7 +87,12 @@ const useDogStore = create<DogStore>(set => ({
             credentials: 'include'
           });
           const dogsResponse: DogSearch = await response.json();
-          
+          set({
+            extraQueries: {
+              next: dogsResponse['next'],
+              prev: dogsResponse['prev'],
+            }
+          })
           // Step 2
           try {
             const fetchResponse = await idToDog(dogsResponse.resultIds);

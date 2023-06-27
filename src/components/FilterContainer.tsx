@@ -9,7 +9,7 @@ import useDogStore from "../store/dogStore";
 
 
 const FilterContainer = () => {
-  const { breedsList, zips, sortState, fetchDogs, fetchLocations, resetZips } = useStore(useDogStore);
+  const { breedsList, zips, sortState, extraQueries, fetchDogs, fetchLocations, resetZips } = useStore(useDogStore);
   
   const [ selectedBreed, setSelectedBreed ] = useState<string[]>([]);
   

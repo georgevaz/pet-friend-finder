@@ -3,13 +3,22 @@ import useDogStore from "../store/dogStore";
 import { useStore } from "zustand";
 import SearchBar from "./SearchBar";
 import DogCard from "./DogCard";
+import { Button } from "@mui/material";
 
 const SearchContainer = () => {
-  const { favoriteDogsResults, favoriteDogsIds, favoritesContainerState, dogSearchResults, zipCityState, fetchFavorites } = useStore(useDogStore);
-
+  const { favoriteDogsResults, favoriteDogsIds, extraQueries, favoritesContainerState, dogSearchResults, zipCityState, fetchDogs, fetchFavorites } = useStore(useDogStore);
   useEffect(() => {
     if(favoriteDogsIds[0]) fetchFavorites(favoriteDogsIds);
   }, [favoriteDogsIds])
+
+  const prevFetch = () => {
+    fetchDogs({}, undefined, extraQueries['prev'])
+  };
+
+  const nextFetch = () => {
+    fetchDogs({}, extraQueries['next'])
+  };
+
 
   const cards = favoritesContainerState
   ?
@@ -61,7 +70,9 @@ const SearchContainer = () => {
     <div className="search-container">
       <SearchBar /> 
       <div className="card-row-container">
+        <Button onClick={prevFetch}>Prev</Button>
         {results}
+        <Button onClick={nextFetch}>next</Button>
       </div>
     </div>
     </>
