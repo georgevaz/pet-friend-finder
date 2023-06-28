@@ -105,3 +105,15 @@
         color: $alert;
     }
 }
+
+.arrow-icon{
+    @include mui-search-bar-button;
+    &.MuiIconButton-root {
+        color: $primary-dark;
+        width: 1.5em;
+        height: 1.5em;
+        & svg {
+            font-size: 1.75em;
+        }
+    }
+}

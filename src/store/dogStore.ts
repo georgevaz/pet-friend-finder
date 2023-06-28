@@ -37,9 +37,9 @@ const useDogStore = create<DogStore>(set => ({
     zipCityState: <ZipCityState>{},
     zips: [],
     sortState: {
-      'ascend': false,
+      'ascend': true,
       'descend': false,
-      'off': true,
+      'off': false,
     },
     favoriteDogsIds: [],
     favoriteDogsResults: [],
@@ -61,14 +61,9 @@ const useDogStore = create<DogStore>(set => ({
     },
 
     fetchDogs: async (params, next?, prev?) => {
-        let url = '';
-        if(next){
-          url = 'https://frontend-take-home-service.fetch.com' + next;
-          console.log('next')
-        } else if(prev){
-          url = 'https://frontend-take-home-service.fetch.com' + prev;
-          console.log(prev)
-        }
+        let url = 'https://frontend-take-home-service.fetch.com';
+        if(next) url += next;
+        else if(prev) url += prev;
         else {
           let queryString = '';
           for(const [key, value] of Object.entries(params)){
@@ -77,7 +72,6 @@ const useDogStore = create<DogStore>(set => ({
           }
           const baseUrl = 'https://frontend-take-home-service.fetch.com/dogs/search';
           url = `${baseUrl}${queryString ? `?${queryString}` : ''}`;
-          console.log(params)
         }
 
         // Step 1
@@ -97,10 +91,7 @@ const useDogStore = create<DogStore>(set => ({
           try {
             const fetchResponse = await idToDog(dogsResponse.resultIds);
             const response = await fetchResponse.json();
-            set({
-                dogSearchResults: response
-            })
-            
+
             // Step 3
             const zips = response.map((dogs: Dog) => dogs.zip_code);
             try {
@@ -112,6 +103,7 @@ const useDogStore = create<DogStore>(set => ({
                 body: JSON.stringify(zips),
                 credentials: 'include',
               });
+
               const zipResults: Location[] = await zipResponse.json();
               set((prevState) => ({
                   zipCityState: {
@@ -119,6 +111,12 @@ const useDogStore = create<DogStore>(set => ({
                       ...zipping(zipResults)
                   }
               }));
+              
+              // Storing our results after we find and store zip information for proper rendering purposes.
+              set({
+                dogSearchResults: response,
+              });
+
             } catch (error) {
                 console.error(error);
             };

@@ -6,7 +6,7 @@ import { useStore } from 'zustand';
 import useDogStore from '../store/dogStore';
 
 const DogCard = ( { id, img, name, breed, age, zip, city, state }: DogCardProps) => {
-  const { favoriteDogsIds, favoritesContainerState, addFavoriteDog, removeFavoriteDog } = useStore(useDogStore);
+  const { favoriteDogsIds, favoritesContainerState, zipCityState, addFavoriteDog, removeFavoriteDog } = useStore(useDogStore);
   const [ favorite, setFavorite ] = useState(false);
 
   useEffect(() => {
@@ -17,7 +17,6 @@ const DogCard = ( { id, img, name, breed, age, zip, city, state }: DogCardProps)
     setFavorite(!favorite);
     !favorite ? addFavoriteDog(id) : removeFavoriteDog(id, favoriteDogsIds);
   };
-
   return (
     <>
       <Card key={id} className='card-container'>
@@ -40,7 +39,7 @@ const DogCard = ( { id, img, name, breed, age, zip, city, state }: DogCardProps)
             <br/>
             Age: {age} years
           </p>
-          <p className="card-p-location">{zip ? `${city}, ` : 'Zip Code: '}{zip ? state : zip}</p>
+          <p className="card-p-location">{zipCityState[zip] ? `${city}, ` : 'Zip Code: '}{zipCityState[zip] ? state : zip}</p>
         </div>
       </Card>
     </>

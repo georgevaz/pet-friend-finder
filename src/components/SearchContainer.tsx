@@ -3,7 +3,10 @@ import useDogStore from "../store/dogStore";
 import { useStore } from "zustand";
 import SearchBar from "./SearchBar";
 import DogCard from "./DogCard";
-import { Button } from "@mui/material";
+import { IconButton } from "@mui/material";
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
+import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
+
 
 const SearchContainer = () => {
   const { favoriteDogsResults, favoriteDogsIds, extraQueries, favoritesContainerState, dogSearchResults, zipCityState, fetchDogs, fetchFavorites } = useStore(useDogStore);
@@ -18,8 +21,6 @@ const SearchContainer = () => {
   const nextFetch = () => {
     fetchDogs({}, extraQueries['next'])
   };
-
-
   const cards = favoritesContainerState
   ?
   favoriteDogsResults.map(dog => {
@@ -67,14 +68,26 @@ const SearchContainer = () => {
 
   return(
     <>
+      <SearchBar />
     <div className="search-container">
-      <SearchBar /> 
+      {extraQueries['prev'] ?
+        <IconButton className='arrow-icon' onClick={prevFetch}>
+            <KeyboardArrowLeftRoundedIcon/>
+        </IconButton>
+      :
+      <IconButton disabled={true} className='arrow-icon' />
+      }
       <div className="card-row-container">
-        <Button onClick={prevFetch}>Prev</Button>
         {results}
-        <Button onClick={nextFetch}>next</Button>
       </div>
-    </div>
+        {extraQueries['next'] && dogSearchResults.length % 8 === 0 ? // This is a bandaid solution to the arrow appearing despite the 'next' query containing no results
+          <IconButton className='arrow-icon' onClick={nextFetch} >
+              <KeyboardArrowRightRoundedIcon/>
+          </IconButton>
+        :
+          <IconButton disabled={true} className='arrow-icon' />
+        }
+      </div>
     </>
   );
 };
