@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useUserStore from "../store/userStore";
-import { useStore } from "zustand";
-import { TextField, Button } from "@mui/material";
-
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import useUserStore from '../store/userStore';
+import { useStore } from 'zustand';
+import { TextField, Button } from '@mui/material';
 
 const LoginContainer = () => {
-  const { name, email, isLoggedIn, setName, setEmail, setLoggedIn } = useStore(useUserStore);
+  const { name, email, setName, setEmail, setLoggedIn } =
+    useStore(useUserStore);
 
   const handleNameChange = (e: string) => {
     setName(e);
@@ -21,19 +21,22 @@ const LoginContainer = () => {
   const handleSubmit = async () => {
     // check if valid e-mail. receive 400 status if @ or .com not in email entry but get access token anyway
     try {
-      const fetchResponse = await fetch('https://frontend-take-home-service.fetch.com/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const fetchResponse = await fetch(
+        'https://frontend-take-home-service.fetch.com/auth/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+          }),
+          credentials: 'include',
         },
-        body: JSON.stringify({
-          "name": name,
-          "email": email
-      }),
-        credentials: 'include',
-      });
+      );
       const status = await fetchResponse.status;
-      if (status === 200 ){
+      if (status === 200) {
         setLoggedIn(true);
         navigate('/main');
       }
@@ -42,14 +45,29 @@ const LoginContainer = () => {
     }
   };
 
-  return(
+  return (
     <>
       <div className="login-container">
         <div className="form-container">
           <p className="body-h4">Welcome!</p>
-          <TextField className="input-textfield" id="outlined" label="Name" onChange={(e) => handleNameChange(e.target.value)} />
-          <TextField className="input-textfield" id="outlined" label="E-mail" onChange={(e) => handleEmailChange(e.target.value)} />
-          <Button variant='contained' className='button-primary-form' onClick={() => handleSubmit()}>Let's go!</Button>
+          <TextField
+            className="input-textfield"
+            id="outlined"
+            label="Name"
+            onChange={e => handleNameChange(e.target.value)}
+          />
+          <TextField
+            className="input-textfield"
+            id="outlined"
+            label="E-mail"
+            onChange={e => handleEmailChange(e.target.value)}
+          />
+          <Button
+            variant="contained"
+            className="button-primary-form"
+            onClick={() => handleSubmit()}>
+            Let&rsquo;s go!
+          </Button>
         </div>
       </div>
     </>

@@ -6,6 +6,4 @@ import './styles/main.scss';
 const rootContainer = document.getElementById('root');
 const root = createRoot(rootContainer);
 
-root.render(
-  <App />
-);
+root.render(<App />);

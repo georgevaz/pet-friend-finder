@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const NoPage = () => {
-  return(
+  return (
     <>
       <p>404</p>
     </>

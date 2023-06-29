@@ -1,7 +1,7 @@
-import React,  {useEffect } from "react";
-import { useStore } from "zustand";
-import useDogStore from "../store/dogStore";
-import SearchContainer from "../components/SearchContainer";
+import React, { useEffect } from 'react';
+import { useStore } from 'zustand';
+import useDogStore from '../store/dogStore';
+import SearchContainer from '../components/SearchContainer';
 
 const Main = () => {
   const { fetchBreeds, fetchDogs } = useStore(useDogStore);
@@ -16,7 +16,7 @@ const Main = () => {
     });
   }, []);
 
-  return(
+  return (
     <>
       <div className="main-container">
         <SearchContainer />

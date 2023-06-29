@@ -1,12 +1,10 @@
-import React from "react";
+import React from 'react';
 
 const Footer = () => {
-  return(
+  return (
     <>
       <div className="footer">
-        <p>
-          Made by George Vazquez
-        </p>
+        <p>Made by George Vazquez</p>
       </div>
     </>
   );

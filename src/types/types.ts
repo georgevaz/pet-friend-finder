@@ -16,6 +16,10 @@ interface Location {
   county: string;
 }
 
+interface Match {
+  match: string;
+}
+
 interface UserStore {
   name: string;
   email: string;
@@ -101,6 +105,7 @@ interface DogStore {
   favoriteDogsIds: Dog['id'][];
   favoriteDogsResults: Dog[];
   favoritesContainerState: boolean;
+  matchedDog: Match;
 
   fetchBreeds: () => void;
   fetchDogs: (
@@ -115,6 +120,7 @@ interface DogStore {
   removeFavoriteDog: (id: Dog['id'], prevState: Dog['id'][]) => void;
   fetchFavorites: (id: Dog['id'][]) => void;
   toggleFavoritesContainer: () => void;
+  fetchMatch: (ids: Dog['id'][]) => void;
 }
 
 export type {
@@ -127,4 +133,5 @@ export type {
   ZipCityState,
   Sort,
   DogCardProps,
+  Match,
 };
