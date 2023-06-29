@@ -10,6 +10,19 @@ import Drawer from '@mui/material/Drawer';
 import { Sort } from '../types/types';
 import { useStore } from 'zustand';
 import useDogStore from '../store/dogStore';
+import ConfettiExplosion from 'react-confetti-explosion';
+import Dialog from '@mui/material/Dialog';
+import Slide from '@mui/material/Slide';
+import { TransitionProps } from '@mui/material/transitions';
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>,
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const SearchBar = () => {
   const {
@@ -21,6 +34,8 @@ const SearchBar = () => {
     fetchMatch,
   } = useStore(useDogStore);
   const [drawerState, setDrawerState] = useState(false);
+  const [isExploding, setIsExploding] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const toggleDrawer = (open: boolean) => () => {
     setDrawerState(open);
@@ -36,10 +51,34 @@ const SearchBar = () => {
 
   const findMatch = async () => {
     fetchMatch(favoriteDogsIds);
+    setDialogOpen(true);
+    setIsExploding(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
   };
 
   return (
     <>
+      {isExploding && (
+        <ConfettiExplosion
+          particleCount={200}
+          width={2500}
+          height="150vh"
+          onComplete={() => setIsExploding(false)}
+        />
+      )}
+
+      <Dialog
+        open={dialogOpen}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleDialogClose}
+        hideBackdrop={true}>
+        you're a jerk!
+      </Dialog>
+
       <Drawer
         anchor={'left'}
         open={drawerState}

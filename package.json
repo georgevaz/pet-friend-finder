@@ -27,6 +27,7 @@
     "express": "^4.18.2",
     "html-webpack-plugin": "^5.5.0",
     "react": "^18.2.0",
+    "react-confetti-explosion": "^2.1.2",
     "react-dom": "^18.2.0",
     "sass": "^1.59.3",
     "sass-loader": "^13.2.1",
