@@ -177,7 +177,20 @@ $main-container-height: calc(100vh - $navbar-height * 2);
 }
 
 .match-container {
-    color: black;
-    width: 600px;
-    height: 600px;
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+    height: 700px;
+}
+
+.match-image {
+    object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    width: 100%;
+    height: 475px;
 }

@@ -13,7 +13,6 @@ import useDogStore from '../store/dogStore';
 import ConfettiExplosion from 'react-confetti-explosion';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 
@@ -29,8 +28,6 @@ const Transition = React.forwardRef(function Transition(
 const SearchBar = () => {
   const {
     favoritesContainerState,
-    favoriteDogsIds,
-    favoriteDogsResults,
     matchedDog,
     sortState,
     setSortState,
@@ -80,7 +77,18 @@ const SearchBar = () => {
         onClose={handleDialogClose}
         hideBackdrop={true}>
         <DialogContent className="match-container">
-          {dialogOpen ? <img src={matchedDog.img} /> : <></>}
+          {dialogOpen ? (
+            <>
+              <img src={matchedDog.img} className="match-image" />
+              <h1 className="sub-page-h1">🥳</h1>
+              <h1 className="sub-page-h1">hooray!</h1>
+              <p className="p-large">
+                {matchedDog.name} picked you to be their friend!
+              </p>
+            </>
+          ) : (
+            <></>
+          )}
         </DialogContent>
       </Dialog>
 
@@ -95,7 +103,9 @@ const SearchBar = () => {
         {favoritesContainerState ? (
           <Button
             variant="text"
-            className="button-secondary"
+            className={
+              dialogOpen ? 'button-secondary-active' : 'button-secondary'
+            }
             onClick={findMatch}>
             Find My Pet Friend!
           </Button>
