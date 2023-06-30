@@ -12,6 +12,8 @@ import { useStore } from 'zustand';
 import useDogStore from '../store/dogStore';
 import ConfettiExplosion from 'react-confetti-explosion';
 import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 
@@ -28,6 +30,8 @@ const SearchBar = () => {
   const {
     favoritesContainerState,
     favoriteDogsIds,
+    favoriteDogsResults,
+    matchedDog,
     sortState,
     setSortState,
     toggleFavoritesContainer,
@@ -50,7 +54,7 @@ const SearchBar = () => {
   };
 
   const findMatch = async () => {
-    fetchMatch(favoriteDogsIds);
+    await fetchMatch();
     setDialogOpen(true);
     setIsExploding(true);
   };
@@ -69,14 +73,15 @@ const SearchBar = () => {
           onComplete={() => setIsExploding(false)}
         />
       )}
-
       <Dialog
         open={dialogOpen}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleDialogClose}
         hideBackdrop={true}>
-        you're a jerk!
+        <DialogContent className="match-container">
+          {dialogOpen ? <img src={matchedDog.img} /> : <></>}
+        </DialogContent>
       </Dialog>
 
       <Drawer

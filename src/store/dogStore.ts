@@ -36,7 +36,7 @@ const idToDog = (
   });
 };
 
-const useDogStore = create<DogStore>(set => ({
+const useDogStore = create<DogStore>((set, get) => ({
   breedsList: [],
   dogSearchResults: [],
   extraQueries: {
@@ -53,9 +53,7 @@ const useDogStore = create<DogStore>(set => ({
   favoriteDogsIds: [],
   favoriteDogsResults: [],
   favoritesContainerState: false,
-  matchedDog: {
-    match: '',
-  },
+  matchedDog: null,
 
   fetchBreeds: async () => {
     try {
@@ -199,9 +197,9 @@ const useDogStore = create<DogStore>(set => ({
     }));
   },
 
-  removeFavoriteDog: (id, favoriteDogs) => {
-    const index = favoriteDogs.indexOf(id);
-    const copy = [...favoriteDogs];
+  removeFavoriteDog: id => {
+    const index = get().favoriteDogsIds.indexOf(id);
+    const copy = [...get().favoriteDogsIds];
     if (index > -1) copy.splice(index, 1);
     set({
       favoriteDogsIds: copy,
@@ -222,7 +220,7 @@ const useDogStore = create<DogStore>(set => ({
     }));
   },
 
-  fetchMatch: async favoriteDogsIds => {
+  fetchMatch: async () => {
     try {
       const fetchResponse = await fetch(
         'https://frontend-take-home-service.fetch.com/dogs/match',
@@ -231,13 +229,16 @@ const useDogStore = create<DogStore>(set => ({
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(favoriteDogsIds),
+          body: JSON.stringify(get().favoriteDogsIds),
           credentials: 'include',
         },
       );
       const match: Match = await fetchResponse.json();
+      const foundMatch = get().favoriteDogsResults.filter(dog => {
+        return dog.id === match.match;
+      });
       set({
-        matchedDog: match,
+        matchedDog: foundMatch[0],
       });
     } catch (error) {
       console.error(error);

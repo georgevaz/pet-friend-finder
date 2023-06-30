@@ -30,7 +30,7 @@ const DogCard = ({
 
   const handleClickFavorite = () => {
     setFavorite(!favorite);
-    !favorite ? addFavoriteDog(id) : removeFavoriteDog(id, favoriteDogsIds);
+    !favorite ? addFavoriteDog(id) : removeFavoriteDog(id);
   };
   return (
     <>

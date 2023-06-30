@@ -105,7 +105,7 @@ interface DogStore {
   favoriteDogsIds: Dog['id'][];
   favoriteDogsResults: Dog[];
   favoritesContainerState: boolean;
-  matchedDog: Match;
+  matchedDog: Dog | null;
 
   fetchBreeds: () => void;
   fetchDogs: (
@@ -117,10 +117,10 @@ interface DogStore {
   resetZips: () => void;
   setSortState: (sort: Sort, next: Sort) => void;
   addFavoriteDog: (id: Dog['id']) => void;
-  removeFavoriteDog: (id: Dog['id'], prevState: Dog['id'][]) => void;
+  removeFavoriteDog: (id: Dog['id']) => void;
   fetchFavorites: (id: Dog['id'][]) => void;
   toggleFavoritesContainer: () => void;
-  fetchMatch: (ids: Dog['id'][]) => void;
+  fetchMatch: () => void;
 }
 
 export type {

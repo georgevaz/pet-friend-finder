@@ -14,7 +14,6 @@ const SearchContainer = () => {
     extraQueries,
     favoritesContainerState,
     dogSearchResults,
-    matchedDog,
     zipCityState,
     fetchDogs,
     fetchFavorites,
@@ -22,7 +21,7 @@ const SearchContainer = () => {
 
   useEffect(() => {
     if (favoriteDogsIds[0]) fetchFavorites(favoriteDogsIds);
-  }, [favoritesContainerState]);
+  }, [favoritesContainerState, favoriteDogsIds]);
 
   const prevFetch = () => {
     fetchDogs({}, undefined, extraQueries['prev']);
