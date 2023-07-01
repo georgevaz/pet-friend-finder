@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -6,7 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/',
   },
   mode: 'development',
   devServer: {
@@ -17,7 +19,7 @@ module.exports = {
     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, './build'),
-      publicPath: '/'
+      publicPath: '/',
     },
   },
   module: {
@@ -28,41 +30,29 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react'
-            ],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
       {
         test: /\.s[ac]ss$/i,
         exclude: /(node_modues)/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(ts|tsx)$/,
         exclude: /(node_modules)/,
-        use: ["ts-loader"],
+        use: ['ts-loader'],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './index.html'
+      template: './index.html',
     }),
   ],
   resolve: {
-    extensions: [
-      '.js',
-      '.jsx',
-      '.ts',
-      '.tsx'
-    ],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 };
