@@ -11,7 +11,7 @@ const App = () => {
   return (
     <>
       <div className="page-container">
-        <BrowserRouter>
+        <BrowserRouter basename="/pet-friend-finder/">
           <Routes>
             <Route path="/" element={<NavBar />}>
               <Route index element={<Home />} />
