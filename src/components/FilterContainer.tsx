@@ -7,6 +7,9 @@ import FormControl from '@mui/material/FormControl';
 import { useStore } from 'zustand';
 import useDogStore from '../store/dogStore';
 
+// TODO
+// Fix City/State Filter
+
 const FilterContainer = () => {
   const { breedsList, zips, sortState, fetchDogs, fetchLocations, resetZips } =
     useStore(useDogStore);

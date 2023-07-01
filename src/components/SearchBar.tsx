@@ -77,7 +77,7 @@ const SearchBar = () => {
         onClose={handleDialogClose}
         hideBackdrop={true}>
         <DialogContent className="match-container">
-          {dialogOpen ? (
+          {matchedDog ? (
             <>
               <img src={matchedDog.img} className="match-image" />
               <h1 className="sub-page-h1">🥳</h1>

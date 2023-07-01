@@ -1,3 +1,4 @@
+import { chunk as chonk } from 'lodash';
 import { create } from 'zustand';
 import {
   DogSearch,
@@ -52,6 +53,7 @@ const useDogStore = create<DogStore>((set, get) => ({
   },
   favoriteDogsIds: [],
   favoriteDogsResults: [],
+  favoriteDogResultsChonked: [],
   favoritesContainerState: false,
   matchedDog: null,
 
@@ -211,6 +213,7 @@ const useDogStore = create<DogStore>((set, get) => ({
     const response = await fetchResponse.json();
     set({
       favoriteDogsResults: response,
+      favoriteDogResultsChonked: chonk(response, 8),
     });
   },
 

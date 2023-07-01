@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useDogStore from '../store/dogStore';
 import { useStore } from 'zustand';
 import SearchBar from './SearchBar';
@@ -6,10 +6,43 @@ import DogCard from './DogCard';
 import { IconButton } from '@mui/material';
 import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
+import { Dog, ZipCityState } from '../types/types';
+import { map } from 'lodash';
+
+const pupulateCards = (
+  arr: Dog[],
+  zipCollection: ZipCityState,
+): JSX.Element[] => {
+  return map(arr, dog => {
+    return (
+      <DogCard
+        key={dog.id}
+        id={dog.id}
+        img={dog.img}
+        name={dog.name}
+        breed={dog.breed}
+        age={dog.age}
+        zip={dog.zip_code}
+        city={
+          zipCollection[dog.zip_code] ? zipCollection[dog.zip_code].city : null
+        }
+        state={
+          zipCollection[dog.zip_code] ? zipCollection[dog.zip_code].state : null
+        }
+      />
+    );
+  });
+};
+
+interface FavoriteQueries {
+  prev: number | null;
+  curr: number;
+  next: number | null;
+}
 
 const SearchContainer = () => {
   const {
-    favoriteDogsResults,
+    favoriteDogResultsChonked,
     favoriteDogsIds,
     extraQueries,
     favoritesContainerState,
@@ -18,6 +51,12 @@ const SearchContainer = () => {
     fetchDogs,
     fetchFavorites,
   } = useStore(useDogStore);
+
+  const [favoriteQueries, setFavoriteQueries] = useState<FavoriteQueries>({
+    prev: null,
+    curr: 0,
+    next: favoriteDogResultsChonked[1] ? 1 : null,
+  });
 
   useEffect(() => {
     if (favoriteDogsIds[0]) fetchFavorites(favoriteDogsIds);
@@ -31,55 +70,31 @@ const SearchContainer = () => {
     fetchDogs({}, extraQueries['next']);
   };
 
-  const cards = favoritesContainerState
-    ? favoriteDogsResults.map(dog => {
-        return (
-          <DogCard
-            key={dog.id}
-            id={dog.id}
-            img={dog.img}
-            name={dog.name}
-            breed={dog.breed}
-            age={dog.age}
-            zip={dog.zip_code}
-            city={
-              zipCityState[dog.zip_code]
-                ? zipCityState[dog.zip_code].city
-                : null
-            }
-            state={
-              zipCityState[dog.zip_code]
-                ? zipCityState[dog.zip_code].state
-                : null
-            }
-          />
-        );
-      })
-    : dogSearchResults.map(dog => {
-        return (
-          <DogCard
-            key={dog.id}
-            id={dog.id}
-            img={dog.img}
-            name={dog.name}
-            breed={dog.breed}
-            age={dog.age}
-            zip={dog.zip_code}
-            city={
-              zipCityState[dog.zip_code]
-                ? zipCityState[dog.zip_code].city
-                : null
-            }
-            state={
-              zipCityState[dog.zip_code]
-                ? zipCityState[dog.zip_code].state
-                : null
-            }
-          />
-        );
-      });
+  const prevFav = () => {
+    setFavoriteQueries({
+      prev: favoriteQueries.prev - 1,
+      curr: favoriteQueries.curr - 1,
+      next: favoriteQueries.next - 1,
+    });
+  };
 
-  const results: React.ReactNode[] = [];
+  const nextFav = () => {
+    setFavoriteQueries({
+      prev: favoriteQueries.prev + 1,
+      curr: favoriteQueries.curr + 1,
+      next: favoriteQueries.next + 1,
+    });
+  };
+
+  const cards = favoritesContainerState
+    ? pupulateCards(
+        favoriteDogResultsChonked[favoriteQueries.curr],
+        zipCityState,
+      )
+    : pupulateCards(dogSearchResults, zipCityState);
+
+  const results: JSX.Element[] = [];
+
   cards.forEach((card, index) => {
     if (index % 4 === 0 || index === 0) {
       results.push(
@@ -94,7 +109,15 @@ const SearchContainer = () => {
     <>
       <SearchBar />
       <div className="search-container">
-        {extraQueries['prev'] ? (
+        {favoritesContainerState ? (
+          favoriteQueries.prev ? (
+            <IconButton className="arrow-icon" onClick={prevFav}>
+              <KeyboardArrowLeftRoundedIcon />
+            </IconButton>
+          ) : (
+            <IconButton disabled={true} className="arrow-icon" />
+          )
+        ) : extraQueries['prev'] ? (
           <IconButton className="arrow-icon" onClick={prevFetch}>
             <KeyboardArrowLeftRoundedIcon />
           </IconButton>
@@ -102,7 +125,15 @@ const SearchContainer = () => {
           <IconButton disabled={true} className="arrow-icon" />
         )}
         <div className="card-row-container">{results}</div>
-        {extraQueries['next'] && dogSearchResults.length % 8 === 0 ? ( // This is a bandaid solution to the arrow appearing despite the 'next' query containing no results
+        {favoritesContainerState ? (
+          favoriteQueries.next ? (
+            <IconButton className="arrow-icon" onClick={nextFav}>
+              <KeyboardArrowRightRoundedIcon />
+            </IconButton>
+          ) : (
+            <IconButton disabled={true} className="arrow-icon" />
+          )
+        ) : extraQueries['next'] && dogSearchResults.length % 8 === 0 ? ( // This is a bandaid solution to the arrow appearing despite the 'next' query containing no results
           <IconButton className="arrow-icon" onClick={nextFetch}>
             <KeyboardArrowRightRoundedIcon />
           </IconButton>

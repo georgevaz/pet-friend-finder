@@ -104,6 +104,7 @@ interface DogStore {
   };
   favoriteDogsIds: Dog['id'][];
   favoriteDogsResults: Dog[];
+  favoriteDogResultsChonked: Dog[][];
   favoritesContainerState: boolean;
   matchedDog: Dog | null;
 
