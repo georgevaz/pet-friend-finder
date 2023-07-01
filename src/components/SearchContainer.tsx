@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import useDogStore from '../store/dogStore';
 import { useStore } from 'zustand';
 import SearchBar from './SearchBar';
@@ -55,8 +55,18 @@ const SearchContainer = () => {
   const [favoriteQueries, setFavoriteQueries] = useState<FavoriteQueries>({
     prev: null,
     curr: 0,
-    next: favoriteDogResultsChonked[1] ? 1 : null,
+    next: null,
   });
+  // TODO
+  // Persist page user was on
+
+  useMemo(() => {
+    setFavoriteQueries({
+      prev: null,
+      curr: 0,
+      next: favoriteDogResultsChonked[1] ? 1 : null,
+    });
+  }, [favoriteDogResultsChonked]);
 
   useEffect(() => {
     if (favoriteDogsIds[0]) fetchFavorites(favoriteDogsIds);
@@ -72,7 +82,9 @@ const SearchContainer = () => {
 
   const prevFav = () => {
     setFavoriteQueries({
-      prev: favoriteQueries.prev - 1,
+      prev: favoriteDogResultsChonked[favoriteQueries.prev - 1]
+        ? favoriteQueries.prev - 1
+        : null,
       curr: favoriteQueries.curr - 1,
       next: favoriteQueries.next - 1,
     });
@@ -82,7 +94,9 @@ const SearchContainer = () => {
     setFavoriteQueries({
       prev: favoriteQueries.prev + 1,
       curr: favoriteQueries.curr + 1,
-      next: favoriteQueries.next + 1,
+      next: favoriteDogResultsChonked[favoriteQueries.next + 1]
+        ? favoriteQueries.next + 1
+        : null,
     });
   };
 
