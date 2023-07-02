@@ -57,7 +57,7 @@ module.exports = (env) => {
       }),
       new DefinePlugin({
         'process.env': JSON.stringify(dotenv.parsed),
-        'process.env.REACT_APP_ENV': env.REACT_APP_ENV === 'gh' ? JSON.stringify('gh') : JSON.stringify(dotenv.parsed.REACT_APP_ENV),
+        'process.env.REACT_APP_ENV': env.REACT_APP_ENV === 'gh' ? JSON.stringify(env.REACT_APP_ENV) : JSON.stringify(dotenv.parsed.REACT_APP_ENV),
       })
     ],
     resolve: {

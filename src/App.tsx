@@ -4,6 +4,7 @@ import {
   BrowserRouterProps,
   Routes,
   Route,
+  HashRouter,
 } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
@@ -20,7 +21,8 @@ const App = () => {
   return (
     <>
       <div className="page-container">
-        <BrowserRouter {...routerProps}>
+        {/* <BrowserRouter {...routerProps}> */}
+        <HashRouter {...routerProps}>
           <Routes>
             <Route path="/" element={<NavBar />}>
               <Route index element={<Home />} />
@@ -29,7 +31,8 @@ const App = () => {
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
-        </BrowserRouter>
+        {/* </BrowserRouter> */}
+        </HashRouter>
         <Footer />
       </div>
     </>
