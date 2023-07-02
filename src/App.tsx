@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter,
+  BrowserRouterProps,
+  Routes,
+  Route,
+} from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -8,10 +13,15 @@ import NoPage from './pages/NoPage';
 import Footer from './components/Footer';
 
 const App = () => {
+  const routerProps: BrowserRouterProps = {};
+  if (process.env.NODE_ENV === 'production') {
+    routerProps['basename'] = '/pet-friend-finder/';
+  }
+
   return (
     <>
       <div className="page-container">
-        <BrowserRouter basename="/pet-friend-finder/">
+        <BrowserRouter {...routerProps}>
           <Routes>
             <Route path="/" element={<NavBar />}>
               <Route index element={<Home />} />
