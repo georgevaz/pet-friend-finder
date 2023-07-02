@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 const App = () => {
   const routerProps: BrowserRouterProps = {};
   console.log(process.env)
+  console.log(process.env.NODE_ENV)
   if (process.env.REACT_APP_ENV !== 'local') {     // NOTE only including because 'basename' breaks local
     routerProps['basename'] = '/pet-friend-finder/';
   }

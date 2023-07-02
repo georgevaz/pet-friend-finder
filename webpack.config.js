@@ -6,7 +6,6 @@ const { DefinePlugin } = require('webpack');
 
 const dotenv = require('dotenv').config({ path: __dirname + '/.env' })
 
-
 module.exports = {
   entry: './src/index.js',
   output: {
