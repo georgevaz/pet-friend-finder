@@ -19,7 +19,8 @@ const LoginContainer = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    // check if valid e-mail. receive 400 status if @ or .com not in email entry but get access token anyway
+    // TODO check if valid e-mail. currently receives 400 status if @ or .com not in email entry but get access token anyway
+    // Show error message if input is incorrect
     try {
       const fetchResponse = await fetch(
         'https://frontend-take-home-service.fetch.com/auth/login',

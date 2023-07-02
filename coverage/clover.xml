@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1688321944486" clover="3.2.0">
+  <project timestamp="1688321944486" name="All files">
+    <metrics statements="69" coveredstatements="6" conditionals="12" coveredconditionals="0" methods="25" coveredmethods="1" elements="106" coveredelements="7" complexity="0" loc="69" ncloc="69" packages="1" files="1" classes="1"/>
+    <file name="dogStore.ts" path="/Users/georgevazquez/Desktop/Coding/pet-friend-finder/src/store/dogStore.ts">
+      <metrics statements="69" coveredstatements="6" conditionals="12" coveredconditionals="0" methods="25" coveredmethods="1"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="13" count="0" type="stmt"/>
+      <line num="14" count="0" type="stmt"/>
+      <line num="16" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="17" count="0" type="stmt"/>
+      <line num="18" count="0" type="stmt"/>
+      <line num="24" count="0" type="stmt"/>
+      <line num="27" count="1" type="stmt"/>
+      <line num="30" count="0" type="stmt"/>
+      <line num="40" count="1" type="stmt"/>
+      <line num="60" count="0" type="stmt"/>
+      <line num="62" count="0" type="stmt"/>
+      <line num="69" count="0" type="stmt"/>
+      <line num="70" count="0" type="stmt"/>
+      <line num="74" count="0" type="stmt"/>
+      <line num="78" count="0" type="stmt"/>
+      <line num="79" count="0" type="stmt"/>
+      <line num="80" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="81" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="83" count="0" type="stmt"/>
+      <line num="84" count="0" type="stmt"/>
+      <line num="85" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="86" count="0" type="stmt"/>
+      <line num="87" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="89" count="0" type="stmt"/>
+      <line num="91" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="96" count="0" type="stmt"/>
+      <line num="100" count="0" type="stmt"/>
+      <line num="101" count="0" type="stmt"/>
+      <line num="109" count="0" type="stmt"/>
+      <line num="110" count="0" type="stmt"/>
+      <line num="113" count="0" type="stmt"/>
+      <line num="115" count="0" type="stmt"/>
+      <line num="127" count="0" type="stmt"/>
+      <line num="128" count="0" type="stmt"/>
+      <line num="136" count="0" type="stmt"/>
+      <line num="140" count="0" type="stmt"/>
+      <line num="143" count="0" type="stmt"/>
+      <line num="146" count="0" type="stmt"/>
+      <line num="147" count="0" type="stmt"/>
+      <line num="151" count="0" type="stmt"/>
+      <line num="153" count="0" type="stmt"/>
+      <line num="164" count="0" type="stmt"/>
+      <line num="165" count="0" type="stmt"/>
+      <line num="166" count="0" type="stmt"/>
+      <line num="172" count="0" type="stmt"/>
+      <line num="176" count="0" type="stmt"/>
+      <line num="181" count="0" type="stmt"/>
+      <line num="187" count="0" type="stmt"/>
+      <line num="197" count="0" type="stmt"/>
+      <line num="203" count="0" type="stmt"/>
+      <line num="204" count="0" type="stmt"/>
+      <line num="205" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="206" count="0" type="stmt"/>
+      <line num="211" count="0" type="stmt"/>
+      <line num="212" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="213" count="0" type="stmt"/>
+      <line num="214" count="0" type="stmt"/>
+      <line num="221" count="0" type="stmt"/>
+      <line num="226" count="0" type="stmt"/>
+      <line num="228" count="0" type="stmt"/>
+      <line num="239" count="0" type="stmt"/>
+      <line num="240" count="0" type="stmt"/>
+      <line num="241" count="0" type="stmt"/>
+      <line num="243" count="0" type="stmt"/>
+      <line num="247" count="0" type="stmt"/>
+      <line num="252" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

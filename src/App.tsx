@@ -4,7 +4,6 @@ import {
   BrowserRouterProps,
   Routes,
   Route,
-  HashRouter,
 } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
@@ -21,8 +20,7 @@ const App = () => {
   return (
     <>
       <div className="page-container">
-        {/* <BrowserRouter {...routerProps}> */}
-        <HashRouter {...routerProps}>
+        <BrowserRouter {...routerProps}> {/* TODO GH pages routing bug, refreshing causes 404 */}
           <Routes>
             <Route path="/" element={<NavBar />}>
               <Route index element={<Home />} />
@@ -31,8 +29,7 @@ const App = () => {
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
-        {/* </BrowserRouter> */}
-        </HashRouter>
+        </BrowserRouter>
         <Footer />
       </div>
     </>
