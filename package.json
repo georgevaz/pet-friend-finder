@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "start": "webpack serve --hot --progress --open",
-    "build": "webpack",
+    "build": "webpack --env REACT_APP_ENV=gh",
     "lint": "eslint ."
   },
   "keywords": [],
