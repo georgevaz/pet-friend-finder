@@ -14,10 +14,9 @@ import Footer from './components/Footer';
 
 const App = () => {
   const routerProps: BrowserRouterProps = {};
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.REACT_APP_ENV !== 'local') {
     routerProps['basename'] = '/pet-friend-finder/';
   }
-
   return (
     <>
       <div className="page-container">

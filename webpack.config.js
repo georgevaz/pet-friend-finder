@@ -2,6 +2,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { DefinePlugin } = require('webpack');
+
+const dotenv = require('dotenv').config({ path: __dirname + '/.env' })
+
 
 module.exports = {
   entry: './src/index.js',
@@ -51,6 +55,9 @@ module.exports = {
       filename: 'index.html',
       template: './index.html',
     }),
+    new DefinePlugin({
+      'process.env': JSON.stringify(dotenv.parsed),
+    })
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
