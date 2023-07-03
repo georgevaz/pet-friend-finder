@@ -20,7 +20,8 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "prettier"
+        "prettier",
+        "jest"
     ],
     "rules": {
         "prettier/prettier": ["error"]

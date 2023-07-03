@@ -1,7 +1,10 @@
+// This jest config is not used.
+
+// eslint-disable-next-line no-undef
 module.exports = {
   roots: ['<rootDir>'],
   transform: {
-    '^.+\\.ts?$': 'ts-jest'
+    '^.+\\.ts?$': 'ts-jest',
   },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$',
   moduleFileExtensions: ['ts', 'js', 'json', 'node'],
