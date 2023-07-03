@@ -6,21 +6,18 @@ const { create: actualCreate } = jest.requireActual<typeof zustand>('zustand');
 // a variable to hold reset functions for all stores declared in the app
 export const storeResetFns = new Set<() => void>();
 
-// when creating a store, we get its initial state, create a reset function and add it in the set
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
-export const create = (<T extends unknown>() => {
-  console.log('zustand create mock');
+export const create = <S>(createState: zustand.StateCreator<S>) => {
+  return typeof createState === 'function'
+    ? createInternalFn(createState)
+    : createInternalFn;
+};
 
-  return (stateCreator: zustand.StateCreator<T>) => {
-    const store = actualCreate(stateCreator);
-    console.log({store})
-    // const initialState = store.getState();
-    // storeResetFns.add(() => {
-    //   store.setState(initialState, true);
-    // });
-    return store;
-  };
-}) as typeof zustand.create;
+const createInternalFn = <S>(createState: zustand.StateCreator<S>) => {
+  const store = actualCreate(createState);
+  const initialState = store.getState();
+  storeResetFns.add(() => store.setState(initialState, true));
+  return store;
+};
 
 // reset all stores after each test run
 afterEach(() => {
