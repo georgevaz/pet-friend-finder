@@ -8,14 +8,7 @@ https://georgevaz.github.io/pet-friend-finder/
 
 ## How to run locally
 
-Navigate to a local directory:
-
-```
-git clone https://github.com/georgevaz/pet-friend-finder.git
-```
-
-
-Install dependecies:
+Install dependencies:
 
 ```
 npm install

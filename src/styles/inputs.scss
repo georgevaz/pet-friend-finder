@@ -6,20 +6,33 @@
         font-family: $lexend;
         color: $white-dark;
     }
-    & label.Mui-focused{
+    & label.Mui-focused {
         font-family: $lexend;
         color: $secondary-color;
     }
+    & label.Mui-error {
+        font-family: $lexend;
+        color: $alert;
+    }
+    & .MuiFormHelperText-root {
+        &.Mui-error {
+            font-family: $lexend;
+            color: $alert;
+        }
+    }
     & .MuiOutlinedInput-root {
-        &.MuiOutlinedInput-notchedOutline {
+        & .MuiOutlinedInput-notchedOutline {
             border-radius: 5px;
             border-color: $white-dark;
         }
         &:hover .MuiOutlinedInput-notchedOutline{
-            border-color: $white-dark
+            border-color: $white-dark;
         }
         &.Mui-focused .MuiOutlinedInput-notchedOutline{
-            border-color: $secondary-color
+            border-color: $secondary-color;
+        }
+        &.Mui-error .MuiOutlinedInput-notchedOutline{
+            border-color: $alert;
         }
     }
 }
