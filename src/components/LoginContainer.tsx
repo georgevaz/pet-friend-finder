@@ -1,32 +1,46 @@
-import React, { useState, FocusEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useUserStore from '../store/userStore';
 import { useStore } from 'zustand';
 import { TextField, Button } from '@mui/material';
 
 const LoginContainer = () => {
-  const { name, email, setName, setEmail, setLoggedIn } =
+  const { name, email, isLoggedIn, setName, setEmail, setLoggedIn } =
     useStore(useUserStore);
-  const [nameError, setNameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
+  const [nameError, setNameError] = useState<boolean | null>(null);
+  const [emailError, setEmailError] = useState<boolean | null>(null);
+  const [buttonDisable, setButtonDisable] = useState(true);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setName('');
+      setEmail('');
+    }
+  }, []);
 
   const handleNameChange = (e: string) => {
     setName(e);
-    if (!e) setNameError(true);
-    else setNameError(false);
+    if (!e) {
+      setNameError(true);
+      setButtonDisable(true || emailError);
+    } else {
+      setNameError(false);
+      setButtonDisable(false || emailError);
+    }
   };
 
   const handleEmailChange = (e: string) => {
-    setEmail(e);
-    if (!e) setEmailError(true);
-    else setEmailError(false);
-  };
-
-  const handleEmailUnfocus = (e: FocusEvent<HTMLInputElement>) => {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (!re.test(e.target.value)) setEmailError(true);
+    setEmail(e);
+    if (!e || !re.test(e)) {
+      setEmailError(true);
+      setButtonDisable(true || nameError);
+    } else {
+      setEmailError(false);
+      setButtonDisable(false || nameError);
+    }
   };
 
   const navigate = useNavigate();
@@ -56,7 +70,10 @@ const LoginContainer = () => {
       } catch (error) {
         console.error(error);
       }
-    } else console.log('error');
+    } else {
+      if (!name) setNameError(true);
+      if (!email) setEmailError(true);
+    }
   };
 
   return (
@@ -70,6 +87,7 @@ const LoginContainer = () => {
             label="Name"
             type="text"
             onChange={e => handleNameChange(e.target.value)}
+            onBlur={e => handleNameChange(e.target.value)}
             error={nameError}
             helperText={nameError ? 'Please provide valid name' : ''}
           />
@@ -79,13 +97,14 @@ const LoginContainer = () => {
             label="E-mail"
             type="email"
             onChange={e => handleEmailChange(e.target.value)}
-            onBlur={handleEmailUnfocus}
+            onBlur={e => handleEmailChange(e.target.value)}
             error={emailError}
             helperText={emailError ? 'Please provide valid email' : ''}
           />
           <Button
             variant="contained"
             className="button-primary-form"
+            disabled={buttonDisable}
             onClick={() => handleSubmit()}>
             Let&rsquo;s go!
           </Button>

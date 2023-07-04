@@ -1,5 +1,6 @@
 import React from 'react';
-
+// TODO
+// responsive design
 const LandingContainer = () => {
   return (
     <>
