@@ -53,7 +53,8 @@ module.exports = env => {
     plugins: [
       new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: './index.html',
+        template:
+          env.REACT_APP_ENV === 'gh' ? './index.html' : './src/index.html',
       }),
       new DefinePlugin({
         'process.env': JSON.stringify(dotenv.parsed),

@@ -25,7 +25,7 @@ const LoginContainer = () => {
       setButtonDisable(true || emailError);
     } else {
       setNameError(false);
-      setButtonDisable(false || emailError);
+      setButtonDisable(false || !email);
     }
   };
 
@@ -39,7 +39,7 @@ const LoginContainer = () => {
       setButtonDisable(true || nameError);
     } else {
       setEmailError(false);
-      setButtonDisable(false || nameError);
+      setButtonDisable(false || !name);
     }
   };
 
