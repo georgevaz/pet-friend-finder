@@ -1,3 +1,4 @@
+// returned objects
 interface Dog {
   id: string;
   img: string;
@@ -20,16 +21,31 @@ interface Match {
   match: string;
 }
 
-interface UserStore {
-  name: string;
-  email: string;
+type DogSearch = {
+  resultIds: Dog['id'][];
+  total: number;
+  next?: string;
+  prev?: string;
+};
 
-  setName: (data: string) => void;
-  setEmail: (data: string) => void;
+// search params
+type DogSearchParams = {
+  breeds?: string[];
+  zipCodes?: string[];
+  ageMin?: string;
+  ageMax?: string;
+  size?: number;
+  from?: string;
+  sort?: string;
+};
 
-  isLoggedIn: boolean;
-  setLoggedIn: (isLoggedIn: boolean) => void;
-}
+type LocationSearchParams = {
+  city?: string | undefined;
+  states?: string[] | undefined[];
+  geoBoundingBox?: GeoBoundingBox;
+  size?: number;
+  from?: string;
+};
 
 interface ZipCityState {
   [key: string]: CityState;
@@ -52,31 +68,6 @@ type LatLon = {
   lon: number;
 };
 
-type DogSearchParams = {
-  breeds?: string[];
-  zipCodes?: string[];
-  ageMin?: string;
-  ageMax?: string;
-  size?: number;
-  from?: string;
-  sort?: string;
-};
-
-type LocationSearchParams = {
-  city?: string | undefined;
-  states?: string[] | undefined[];
-  geoBoundingBox?: GeoBoundingBox;
-  size?: number;
-  from?: string;
-};
-
-type DogSearch = {
-  resultIds: Dog['id'][];
-  total: number;
-  next?: string;
-  prev?: string;
-};
-
 type DogCardProps = {
   id: string;
   img: string;
@@ -89,6 +80,18 @@ type DogCardProps = {
 };
 
 type Sort = 'ascend' | 'descend' | 'off';
+
+// store interfaces
+interface UserStore {
+  name: string;
+  email: string;
+
+  setName: (data: string) => void;
+  setEmail: (data: string) => void;
+
+  isLoggedIn: boolean;
+  setLoggedIn: (isLoggedIn: boolean) => void;
+}
 
 interface DogStore {
   breedsList: Dog['breed'][];
@@ -125,14 +128,14 @@ interface DogStore {
 }
 
 export type {
-  UserStore,
-  DogStore,
-  DogSearch,
   Dog,
   Location,
+  Match,
+  DogSearch,
   DogSearchParams,
   ZipCityState,
-  Sort,
   DogCardProps,
-  Match,
+  Sort,
+  UserStore,
+  DogStore,
 };

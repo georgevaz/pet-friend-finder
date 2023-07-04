@@ -89,7 +89,7 @@ const LoginContainer = () => {
             onChange={e => handleNameChange(e.target.value)}
             onBlur={e => handleNameChange(e.target.value)}
             error={nameError}
-            helperText={nameError ? 'Please provide valid name' : ''}
+            helperText={nameError ? 'Please provide a valid name' : ''}
           />
           <TextField
             className="input-textfield"
@@ -99,7 +99,7 @@ const LoginContainer = () => {
             onChange={e => handleEmailChange(e.target.value)}
             onBlur={e => handleEmailChange(e.target.value)}
             error={emailError}
-            helperText={emailError ? 'Please provide valid email' : ''}
+            helperText={emailError ? 'Please provide a valid email' : ''}
           />
           <Button
             variant="contained"
