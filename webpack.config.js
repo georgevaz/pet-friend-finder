@@ -4,9 +4,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { DefinePlugin } = require('webpack');
 
-const dotenv = require('dotenv').config({ path: __dirname + '/.env' })
+const dotenv = require('dotenv').config({ path: __dirname + '/.env' });
 
-module.exports = (env) => {
+module.exports = env => {
   return {
     entry: './src/index.js',
     output: {
@@ -57,8 +57,11 @@ module.exports = (env) => {
       }),
       new DefinePlugin({
         'process.env': JSON.stringify(dotenv.parsed),
-        'process.env.REACT_APP_ENV': env.REACT_APP_ENV === 'gh' ? JSON.stringify(env.REACT_APP_ENV) : JSON.stringify(dotenv.parsed.REACT_APP_ENV),
-      })
+        'process.env.REACT_APP_ENV':
+          env.REACT_APP_ENV === 'gh'
+            ? JSON.stringify(env.REACT_APP_ENV)
+            : JSON.stringify(dotenv.parsed.REACT_APP_ENV),
+      }),
     ],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
