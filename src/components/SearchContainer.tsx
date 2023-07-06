@@ -69,7 +69,7 @@ const SearchContainer = () => {
   }, [favoriteDogResultsChonked]);
 
   useEffect(() => {
-    if (favoriteDogsIds[0]) fetchFavorites(favoriteDogsIds);
+    if (favoriteDogsIds) fetchFavorites(favoriteDogsIds);
   }, [favoritesContainerState, favoriteDogsIds]);
 
   const prevFetch = () => {

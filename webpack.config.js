@@ -54,7 +54,7 @@ module.exports = env => {
       new HtmlWebpackPlugin({
         filename: 'index.html',
         template:
-          env.REACT_APP_ENV === 'gh' ? './index.html' : './src/index.html',
+          env.REACT_APP_ENV === 'gh' ? './index.html' : './src/index.html', // find out which env we are refrencing to utilize the appropriate template
       }),
       new DefinePlugin({
         'process.env': JSON.stringify(dotenv.parsed),

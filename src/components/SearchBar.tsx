@@ -28,6 +28,7 @@ const Transition = React.forwardRef(function Transition(
 const SearchBar = () => {
   const {
     favoritesContainerState,
+    favoriteDogsIds,
     matchedDog,
     sortState,
     setSortState,
@@ -101,14 +102,25 @@ const SearchBar = () => {
       </Drawer>
       <div className="search-bar-container">
         {favoritesContainerState ? (
-          <Button
-            variant="text"
-            className={
-              dialogOpen ? 'button-secondary-active' : 'button-secondary'
-            }
-            onClick={findMatch}>
-            Find My Pet Friend!
-          </Button>
+          favoriteDogsIds.length ? (
+            <Button
+              variant="text"
+              className={
+                dialogOpen ? 'button-secondary-active' : 'button-secondary'
+              }
+              onClick={findMatch}>
+              Find My Pet Friend!
+            </Button>
+          ) : (
+            <Button
+              variant="text"
+              className={
+                dialogOpen ? 'button-secondary-active' : 'button-secondary'
+              }
+              disabled
+              onClick={findMatch}
+            />
+          )
         ) : sortState['off'] ? (
           <Button
             variant="text"
