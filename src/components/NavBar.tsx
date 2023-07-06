@@ -39,9 +39,16 @@ const NavBar = () => {
           <li className="nav-bar-button-container">
             {isLoggedIn ? (
               <>
-                <p className="body-h4" style={{ marginRight: '30px' }}>
-                  Welcome, {name}!
-                </p>
+                <Link to="/main">
+                  <p
+                    className="body-h4"
+                    style={{
+                      marginRight: '30px',
+                      textDecoration: 'underline black',
+                    }}>
+                    Welcome, {name}!
+                  </p>
+                </Link>
                 <Link to="/">
                   <Button
                     variant="contained"
