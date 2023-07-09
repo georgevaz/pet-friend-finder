@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardMedia, IconButton } from '@mui/material';
+import { Card, CardMedia, Fade, Box, IconButton, Modal } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { DogCardProps } from '../types/types';
 import { useStore } from 'zustand';
@@ -23,7 +23,7 @@ const DogCard = ({
     removeFavoriteDog,
   } = useStore(useDogStore);
   const [favorite, setFavorite] = useState(false);
-
+  const [imageOpen, setImageOpen] = useState(false);
   useEffect(() => {
     if (favoriteDogsIds.includes(id)) setFavorite(true);
   }, [favorite]);
@@ -32,8 +32,19 @@ const DogCard = ({
     setFavorite(!favorite);
     !favorite ? addFavoriteDog(id) : removeFavoriteDog(id);
   };
+
+  const handleImageClose = () => {
+    setImageOpen(false);
+  };
   return (
     <>
+      <Modal open={imageOpen} onClose={handleImageClose}>
+        <Fade in={imageOpen}>
+          <Box className="image-popup">
+            <img src={img} />
+          </Box>
+        </Fade>
+      </Modal>
       <Card key={id} className="card-container">
         {favoritesContainerState ? (
           <></>
@@ -47,7 +58,7 @@ const DogCard = ({
         <CardMedia
           component="img"
           image={img}
-          onClick={() => console.log('ENHANCE')}
+          onClick={() => setImageOpen(true)}
         />
         <div className="card-copy-container">
           <p className="card-title">{name}</p>
