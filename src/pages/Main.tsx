@@ -2,14 +2,16 @@ import React, { useEffect } from 'react';
 import { useStore } from 'zustand';
 import useDogStore from '../store/dogStore';
 import SearchContainer from '../components/SearchContainer';
-
-// TODO
-// Check Cookie status, redirect user, if not authorized, from /main to /login
+import useUserStore from '../store/userStore';
+import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
   const { fetchBreeds, fetchDogs } = useStore(useDogStore);
+  const { isLoggedIn } = useStore(useUserStore);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!isLoggedIn) navigate('/login');
     fetchBreeds();
     fetchDogs({
       breeds: [],
