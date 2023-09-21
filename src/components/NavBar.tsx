@@ -30,18 +30,25 @@ const NavBar = () => {
     <>
       <nav className="nav-bar">
         <Link to="/">
-          <img
+          {/* <img
             src="https://asset.brandfetch.io/id7Cm60rQf/idITbIwT7X.svg"
             style={{ height: '3em' }}
-          />
+          /> */}
         </Link>
         <ul style={{ listStyle: 'none' }}>
           <li className="nav-bar-button-container">
             {isLoggedIn ? (
               <>
-                <p className="body-h4" style={{ marginRight: '30px' }}>
-                  Welcome, {name}!
-                </p>
+                <Link to="/main">
+                  <p
+                    className="body-h4"
+                    style={{
+                      marginRight: '30px',
+                      textDecoration: 'underline black',
+                    }}>
+                    Welcome, {name}!
+                  </p>
+                </Link>
                 <Link to="/">
                   <Button
                     variant="contained"
