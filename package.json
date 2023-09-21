@@ -8,6 +8,7 @@
     "test": "jest --config ./jest.config.ts",
     "start": "webpack serve --hot --progress --open",
     "build": "webpack --env REACT_APP_ENV=gh",
+    "deploy": "gh-pages -d build",
     "lint": "eslint ."
   },
   "keywords": [],
@@ -57,6 +58,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
+    "gh-pages": "^6.0.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "react-router-dom": "^6.12.1",

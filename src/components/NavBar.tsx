@@ -30,10 +30,10 @@ const NavBar = () => {
     <>
       <nav className="nav-bar">
         <Link to="/">
-          <img
+          {/* <img
             src="https://asset.brandfetch.io/id7Cm60rQf/idITbIwT7X.svg"
             style={{ height: '3em' }}
-          />
+          /> */}
         </Link>
         <ul style={{ listStyle: 'none' }}>
           <li className="nav-bar-button-container">
