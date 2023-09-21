@@ -5,21 +5,21 @@
     &.MuiButton-contained {
         font-family: $lexend;
         color: $white;
-        background-color: $primary-color;
+        background-color: $secondary-color;
     }
     &.MuiButton-contained:hover {
-        background-color: $primary-color;
+        background-color: $secondary-color;
     }
     &.MuiButton-text {
         font-family: $lexend;
-        color: $primary-dark;
+        color: $secondary-dark;
     }
     &.MuiButton-text:hover {
         background: none;
     }
     &.MuiButton-text{
         & .MuiTouchRipple-child {
-            background-color: rgba($color: $primary-light, $alpha: .5);
+            background-color: rgba($color: $secondary-light, $alpha: .5);
         }
     }
 }

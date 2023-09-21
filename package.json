@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest --config ./jest.config.ts",
     "start": "webpack serve --hot --progress --open",
-    "build": "webpack",
+    "build": "webpack --env REACT_APP_ENV=gh",
     "deploy": "gh-pages -d build",
     "lint": "eslint ."
   },

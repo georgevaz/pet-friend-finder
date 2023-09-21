@@ -11,7 +11,7 @@ const LandingContainer = () => {
             Furry Friend
           </h1>
           <p className="p-large">
-            Support Shelters and Make a Difference
+            Support shelters and make a difference.
             <br />
             With Pet Friend Finder, you&rsquo;re not just finding
             <br />
