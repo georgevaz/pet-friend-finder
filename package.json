@@ -8,6 +8,7 @@
     "test": "jest",
     "start": "webpack serve --hot --progress --open",
     "build": "webpack --env REACT_APP_ENV=gh",
+    "deploy": "gh-pages -d build",
     "lint": "eslint ."
   },
   "keywords": [],
