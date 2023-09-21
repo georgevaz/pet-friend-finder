@@ -29,7 +29,12 @@ const NavBar = () => {
   return (
     <>
       <nav className="nav-bar">
-        <Link to="/">
+        <Link
+          to="/"
+          style={{
+            textDecoration: 'none',
+          }}>
+          <p className="hero-h2">Pet Friend Finder</p>
           {/* <img
             src="https://asset.brandfetch.io/id7Cm60rQf/idITbIwT7X.svg"
             style={{ height: '3em' }}

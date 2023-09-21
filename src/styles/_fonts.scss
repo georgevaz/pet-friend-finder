@@ -11,8 +11,17 @@ $syne: 'Syne', sans-serif;
     line-height: 1em;
 }
 
+.hero-h2 {
+    font-family: $syne;
+    color: black;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2.5em;
+    line-height: 1em;
+}
+
 .sub-page-h1{
-    font-family: 'Lexend';
+    font-family: $lexend;
     font-style: normal;
     font-weight: 400;
     font-size: 3em;
