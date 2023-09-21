@@ -53,6 +53,7 @@ module.exports = env => {
     plugins: [
       new HtmlWebpackPlugin({
         filename: 'index.html',
+        favicon: './src/favicon-96x96.png',
         template:
           env.REACT_APP_ENV === 'gh' ? './index.html' : './src/index.html', // find out which env we are refrencing to utilize the appropriate template
       }),
